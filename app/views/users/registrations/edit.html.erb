@@ -1,0 +1,47 @@
+<div class="edit_container">
+<div class="edit">
+<h3>プロフィールを編集する</h3>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+
+
+    <%= f.label :ユーザーネーム %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <br>
+    <%= f.label :自己紹介 %>
+    <%= f.text_area :profile, rows: 10, cols: 50, class: 'editer', style: 'resize: vertical;' %>
+    <br>
+    <%= f.label :プロフィール画像 %>
+    <%= f.file_field :image %>
+    <br>
+    <%= f.label :メールアドレス %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+    <br>
+    <%= f.label :新しいパスワード %> 
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br>
+      <em>※<%= @minimum_password_length %> 文字以上の英数字で入力してください。</em>
+    <% end %>
+    <br>
+    <%= f.label :新しいパスワードをもう一度入力してください %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <br>
+  <%= f.label :現在のパスワードを入力してから更新ボタンを押してください！%>
+  <%= f.password_field :current_password, autocomplete: "current-password" %>
+  <%= f.submit "更新" %>
+<% end %>
+<div class="migisoroe">
+<%= link_to "戻る", :back %>
+</div>
+<br>
+<div class="migisoroe">
+<%= button_to "アカウントを削除する", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+</div>
+</div>
+</div>

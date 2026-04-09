@@ -1,0 +1,93 @@
+<% if @shizen.user.image.attached? %>
+        <%= image_tag  @shizen.user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+<% else %>
+        <i class="fa-solid fa-user fa-2x" style="color: rgb(150, 149, 149);"></i>
+<% end %>
+<div class="hito">
+        <%= link_to @shizen.user.name, user_path(@shizen.user.id) %>
+</div>
+<div class="hennsyuu">
+        <% if user_signed_in? && current_user.id == @shizen.user_id %>
+                <%= button_to edit_shizen_path(@shizen.id), method: :get do %>
+                        <i class="fa-solid fa-gear fa-2x"></i>
+                <% end %>
+        <% end %>
+</div>
+<div class="shizens-container">
+    <% if @shizen.tategazou.attached? %>
+        <%= image_tag @shizen.tategazou,style: "border-radius: 0%; width: 360px; height: 480px; object-fit:cover;" %>
+    <% end %>
+    <% if @shizen.yokogazou.attached? %>
+        <%= image_tag @shizen.yokogazou,style: "border-radius: 0%; width: 640px; height: 480px; object-fit:cover;" %>
+    <% end %>
+    <% if @shizen.tategazou2.attached? %>
+        <%= image_tag @shizen.tategazou2,style: "border-radius: 0%; width: 360px; height: 480px; object-fit:cover;" %>
+    <% end %>
+    <% if @shizen.yokogazou2.attached? %>
+        <%= image_tag @shizen.yokogazou2,style: "border-radius: 0%; width: 640px; height: 480px; object-fit:cover;" %>
+    <% end %>
+</div>
+
+<div class="migisoroe">
+        <% if user_signed_in? %>
+                <% if current_user.already_liked?(@shizen) %>
+                        <%= link_to shizen_like_path(@shizen), method: :delete do %>
+                                <i class="fas fa-heart fa-2x"></i><%= @shizen.likes.count %>
+                        <% end %>
+                <% else %>
+                        <%= link_to shizen_likes_path(@shizen), method: :post do %>
+                                <i class="fa-regular fa-heart fa-2x"></i><%= @shizen.likes.count %>
+                        <% end %>
+                <% end %>
+        <% else %>
+                <i class="fas fa-heart fa-2x"></i><%= @shizen.likes.count %>
+        <% end %>
+</div>
+
+<div class="namae">
+        <p><%= @shizen.spot_name %></p>
+</div>
+<% if @weather_type.present? %>
+  <p>現在の天気:
+  <%= image_tag weather_image_name(@weather_type), size: "60x60", alt: weather_label(@weather_type) %></p>
+<% else %>
+  <p>現在の天気情報を取得できませんでした</p>
+<% end %>
+<p><%= @shizen.ken %></p>
+<p><%= link_to "グーグルマップ", @shizen.maplink if @shizen.maplink? %></p>
+<p><%= link_to @shizen.user.name, user_path(@shizen.user.id) %></p>
+<p><%= @shizen.setumei %></p>
+<br>
+<% if user_signed_in? && current_user.id == @shizen.user_id %>
+        <%= button_to "削除", shizen_path(@shizen.id), method: :delete %>
+<% end %>
+<div class="migisoroe">
+        <% if user_signed_in? %>
+                <%= form_with(model: [@shizen, @comment], local: true) do |f| %>
+                <br>
+                <%= f.text_area :content %>
+                        <%= button_tag type: "submit" do %>
+                                <i class="far fa-comments"></i> コメントする
+                        <% end %>
+                <% end %>
+        <% end %>
+</div>
+<div class="comment-wrapper">
+        <p>コメント一覧</p>
+        <br>
+        <% @comments.each do |c| %>
+                <% if c.user.image.attached? %>
+                        <%= image_tag  c.user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+                <% end %>
+                <%= link_to c.user.name, user_path(c.user.id) %>
+                <br>
+                <%= c.content %>
+        <% end %>
+</div>
+
+<h2>いいねしたユーザー</h2>
+<% @shizen.liked_users.each do |user| %>
+        <li><%= link_to user.name, user_path(user) %></li>
+<% end %>
+<br>
+<%= link_to "自然一覧に戻る", shizens_path %>

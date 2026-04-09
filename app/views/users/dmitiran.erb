@@ -1,0 +1,13 @@
+DM一覧ページ
+<br>
+<% @user.entries.each do |t| %>
+    <% t.room.entries.each do |e| %>
+        <% unless e.user_id == @user.id %>
+        <% if @user.image.attached? %>
+            <%= image_tag  @user.image,style: "border-radius: 50%; width: 60px; height: 60px; object-fit:cover;" %>
+        <% end %>
+        <%= link_to e.user.name, user_path(e.user.id) %>
+        <%= link_to 'DMへ', room_path(e.room.id) %><br>
+        <% end %>
+    <% end %>
+<% end %>

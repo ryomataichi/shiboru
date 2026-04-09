@@ -1,0 +1,202 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ 
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #e5e7eb;
+    color: #222;
+    font-family: "Helvetica Neue", "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+header {
+    background-color:  #4b5563;
+    
+    height: 80px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header a {
+    color: rgb(255, 255, 255); 
+    text-decoration: none; 
+}
+header h1 {
+    color: rgb(255, 255, 255);
+    margin-left: 20px;
+}
+.header-list {
+    display: flex;
+    align-items: center;
+}
+header ul {
+    display: flex;
+}
+header li {
+    list-style: none;
+    margin-right: 40px;
+}
+
+.usershizens-container{
+    overflow-x: scroll;
+    overflow-y: hidden;
+    max-width: 100%;
+    display: flex;
+    gap: 1px;
+    background: white;
+    border: solid 1px white;
+}
+
+.usershizen{
+    overflow-y: hidden;
+    max-width: 150px;
+    max-height: 330px;
+    display:grid
+}
+.comment-wrapper{
+    overflow-y: scroll;
+    max-width: 100%;
+    height: 100px;
+    gap: 1px 1000px;
+    background: white;
+    border: solid 1px rgb(108, 103, 103);
+}
+
+.ken {
+    text-align: right;
+    margin-top: 2%;
+}
+
+.migisoroe{
+    text-align: right;
+    
+}
+.namae{
+    font-size: 30px;
+}
+.pasuwa-do{
+    text-align: center;
+    margin-top: 10%;
+    font-size: 26px;
+}
+.pasuwa-dohozonn{
+    font-size: 18px;
+}
+.main{
+    margin-top: 3%;
+}
+.edit_container{
+    margin-top: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit{
+    font-size: 22px;
+    width: 40%;
+    border: solid 1px;
+}
+.editer{
+    inline-size: 80%;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    width: 80%;
+    height: 50px;
+    background: white;
+    border: solid 1px rgb(108, 103, 103);
+}
+.deka_table{
+    display: flex;
+    width: fit-content;
+}
+.follow_table{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px;
+}
+.follower_table{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px;
+}
+.follower_table p{
+    text-align: center;
+}
+
+.follower_table f{
+    text-align: center;
+}
+
+.follow_table p{
+    text-align: center;
+}
+
+.follow_table f{
+    text-align: center;
+}
+
+.follow_button {
+    text-align: right;
+    position:absolute;
+    top:100px;
+    right:45px;
+}
+
+.hito{
+    position:absolute;
+    top:96px;
+    left: 66px;
+}
+
+.hennsyuu{
+    position: absolute;
+    top: 12%;
+    right: 4%;
+}
+
+.pro{
+    width: 50%;
+}
+
+.hyouzityuu{
+    font-size: 25px;
+}
+.hyouzityuu a{
+    color: rgb(0, 89, 255);
+}
+
+.hihyouzi{
+    font-size: 25px;
+}
+
+.user-info{
+    align-items: end;
+}
+
+#qr-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 999;
+}

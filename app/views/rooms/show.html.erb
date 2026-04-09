@@ -1,0 +1,38 @@
+<div class="user-in">
+<% @entries.each do |e| %>
+    <% if e.user.image.attached? %>
+    <%= image_tag  e.user.image,style: "border-radius: 50%; width: 60px; height: 60px; object-fit:cover;" %>
+<% end %>
+    <h3><strong><a href="/users/<%= e.user.id %>"><%= e.user.email%></a></strong></h3>
+<% end %>
+</div>
+
+<div class="dmMain">
+    <% @messages.each do |m| %>
+        <strong><%= m.body %></strong>
+        <small><%= m.user.email %>さん</small><hr>
+    <% end %>
+
+    <%= form_for @message do |f| %>
+    <%= f.text_field :body, :placeholder => "メッセージを入力して下さい" , :size => 100 %>
+    <%= f.hidden_field :room_id, :value => @room.id %>
+    <br>
+    <%= f.submit "送信する" %>
+    <% end %>
+</div>
+
+<%= link_to "マイページに戻る", user_path(current_user.id) %>
+
+
+<style>
+.user-in{
+    text-align:center;
+    border:1px solid darkgray;
+    background-color:gainsboro;
+}
+.dmMain{
+    padding:30px;
+    border:1px solid darkgray;
+    background-color:gainsboro;
+}
+</style>

@@ -1,0 +1,35 @@
+<div class="edit_container">
+<div class="edit">
+<h3>新規投稿ページ</h3>
+<%= form_for @shizen do |f| %>
+<%= f.label :場所名 %>
+    <%= f.text_field :spot_name, :size => 10 %> 
+    <br>
+    <%= f.label :都道府県 %>
+    <%= f.text_field :ken, :size => 4 %> 
+    <br>
+    <%= f.label :グーグルマップのリンク %>
+    <%= f.text_field :maplink, :size => 25 %>
+    <br>
+    <%= f.label :説明文 %>
+    <%= f.text_field :setumei, :size => 100, class: 'editer'%> 
+    <br>
+    <%= f.label :縦画像 %>
+    <%= f.file_field :tategazou, :size => 100 %> 
+    <br>
+    <%= f.label :縦画像2 %>
+    <%= f.file_field :tategazou2, :size => 100 %> 
+    <br>
+    <%= f.label :横画像 %>
+    <%= f.file_field :yokogazou, :size => 140 %> 
+    <br>
+    <%= f.label :横画像2 %>
+    <%= f.file_field :yokogazou2, :size => 140 %> 
+    <br>
+
+    <%= f.submit "投稿する" %>
+<% end %>
+<br>
+<%= link_to "一覧に戻る", shizens_path %>
+</div>
+</div>

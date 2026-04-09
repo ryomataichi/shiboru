@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shiboru</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/435fa8f9d8.js" crossorigin="anonymous"></script>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+<body>
+  <header>
+  <h1><%= link_to "Shiboru", shizens_path %></h1>
+  <div class="header-list">
+  <ul>
+    <li><%=link_to new_shizen_path  do%>
+    <i class="fa-solid fa-square-plus fa-2xl"></i>
+    <% end %></li>
+    
+
+    <% if user_signed_in? %>
+    <li><%= link_to user_path(current_user.id) do %>
+    <i class="fa-regular fa-user fa-2xl"></i>
+    <% end %>
+    </li>
+    <% else %>
+    <li><%= link_to "新規登録", new_user_registration_path %></li>
+    <li><%= link_to "ログイン", new_user_session_path %></li>
+    <% end %>
+  </ul>
+  </div>
+</header>
+<main>
+  <%= yield %>
+</main>
+</body>
+</html>

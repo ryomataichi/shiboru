@@ -1,0 +1,122 @@
+// Place all the styles related to the shizens controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+a{
+    color: black;
+    text-decoration: none;
+}
+
+.main{
+    padding-left: 1%;
+}
+.shizen{
+    flex:0 0 630px;
+    width: 630px;
+    max-height: 420px;
+    background-color: #ffffff;
+    margin-left: 20px;
+    border-radius: 20px;
+    overflow: hidden; 
+}
+
+.shizen-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 4px;
+}
+
+.shizens-container{
+    margin-top: 2%;
+    margin-bottom: 1%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    gap: 5px;
+    background: #e5e7eb;
+}
+
+.spot-name {
+    font-size: 200%;
+    font-weight: bold;
+    margin-top: 10px;
+    color: black;
+    margin-bottom: 10px; /* ←ここで文字と線の距離調整 */
+  padding-bottom: 10px; /* ←線との余白 */
+
+  border-bottom: 2px solid #d1d5db; /* 灰色ライン */
+}
+.spot-name:hover {
+  color: #111827;
+  transform: scale(0.96);
+}
+.oya-hourly-weather {
+    margin-top: 2px;
+    display: flex;
+    align-items: baseline;
+}
+.hourly-weather {
+    margin-top: 5px;
+    font-size: 20px;
+    color: #555;
+        margin-bottom: 10px; /* ←ここで文字と線の距離調整 */
+  padding-bottom: 10px; /* ←線との余白 */
+
+  border-bottom: 2px solid #d1d5db; /* 灰色ライン */
+
+}
+.like-count a {
+    font-size: 18px;
+    color: rgb(238, 165, 177);
+    margin-top: 5px;
+}
+.ken-tag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+
+  background-color: #f3f4f6;
+  color: #374151;
+
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ken-tag:hover {
+  background-color: #e5e7eb;
+  color: #111827;
+  transform: translateY(-1px);
+}
+.search-wrapper {
+display: flex;
+justify-content: flex-end;
+position: relative;
+font-size: 20px;
+width: 100%;
+padding-left: 1%;
+}
+
+#search-icon {
+  cursor: pointer;
+  font-size: 25px;
+margin-left: auto;
+margin-right: 2%;
+}
+
+#search-form {
+font-size: 25px;
+margin-right: 2%;
+}
+
+.hidden {
+  display: none;
+}
+
+.map-link {
+    margin-left: 10%;
+}
+

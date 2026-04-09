@@ -1,0 +1,26 @@
+<div class="pasuwa-do">
+<h2>ログイン</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  
+    <%= f.label :メールアドレス %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <br>
+    <%= f.label :パスワードを入力 %><br />
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  
+
+  <% if devise_mapping.rememberable? %>
+    <div class="pasuwa-dohozonn">
+      <%= f.check_box :remember_me %>
+      <%= f.label :パスワードを保存する %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "ログイン" %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>
+</div>

@@ -1,0 +1,40 @@
+<div class="pasuwa-do">
+<h2>アカウント作成</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+
+  
+    <%= f.label :ユーザー名 %>
+    <br>
+    <%= f.text_field :name, autofocus: true %>
+    <br>
+    <%= f.label :プロフィール画像 %>
+    <br>
+    <%= f.file_field :image %>
+    <br>
+    <%= f.label :メールアドレス %>
+    <br>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  
+
+    <br>
+    <%= f.label :パスワードを入力 %>
+    <% if @minimum_password_length %>
+    <br>
+    <div class="pasuwa-dohozonn">
+    半角英数字を組み合わせて6文字以上で入力してください。
+    </div>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <br>
+    <%= f.label :パスワード（確認用） %>
+    <br>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <br>
+    <%= f.submit "アカウント作成" %>
+<% end %>
+<br>
+
+<%= render "users/shared/links" %>
+</div>
