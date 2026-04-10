@@ -23,12 +23,12 @@ development:
 test:
   primary:
     <<: *default
-    url: <%= ENV["DATABASE_URL"] %>
+    database: shiboru_test_test
     migrations_paths: db/migrate
 
   queue:
     <<: *default
-    url: <%= ENV["QUEUE_DATABASE_URL"] %>
+    database: shiboru_test_test_queue
     migrations_paths: db/queue_migrate
 
 production:
@@ -38,4 +38,4 @@ production:
 
   queue:
     <<: *default
-    url: <%= ENV["QUEUE_DATABASE_URL"] %>
+    url: <%= ENV["DATABASE_URL"] %>
