@@ -23,12 +23,12 @@ development:
 test:
   primary:
     <<: *default
-    database: <%= ENV["DATABASE_URL"] %>
+    url: <%= ENV["DATABASE_URL"] %>
     migrations_paths: db/migrate
 
   queue:
     <<: *default
-    database: <%= ENV["QUEUE_DATABASE_URL"] %>
+    url: <%= ENV["QUEUE_DATABASE_URL"] %>
     migrations_paths: db/queue_migrate
 
 production:
