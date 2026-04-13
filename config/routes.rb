@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get 'shizens/:shizen_id/likes' => 'likes#create'
-  get 'shizens/:shizen_id/likes/:id' => 'likes#destroy'
-
   resources :shizens do
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create]
   end
+
   get "shizens/matome/:id" => "shizens#matome", as: :shizen_matome
+  get "/refresh_weather", to: "shizens#refresh_weather"
 
   resources :users, only: [:index, :show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]

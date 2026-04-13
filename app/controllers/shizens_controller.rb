@@ -82,6 +82,12 @@ class ShizensController < ApplicationController
 
     end
 
+    def refresh_weather
+        return head :unauthorized unless params[:token] == ENV["CRON_SECRET"]
+
+        RefreshHourlyWeatherJob.perform_now
+        head :ok
+    end
     private
     def shizen_params
         params.require(:shizen).permit(:tategazou, :tategazou2, :yokogazou, :yokogazou2, :spot_name, :ken, :maplink, :setumei, :latitude, :longitude, :hourly_weather_type, :hourly_weather_at, :hourly_weather_checked_at)
