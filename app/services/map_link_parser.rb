@@ -56,6 +56,7 @@ class MapLinkParser
     http.read_timeout = 5
 
     request = Net::HTTP::Get.new(uri.request_uri)
+    request["User-Agent"] = "Mozilla/5.0"
     response = http.request(request)
 
     case response
