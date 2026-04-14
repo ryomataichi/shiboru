@@ -1,10 +1,13 @@
+<div class="show-container">
 <div class="show-top">
-        <% if @shizen.user.image.attached? %>
-                <%= image_tag  @shizen.user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
-        <% else %>
-                <i class="fa-solid fa-user fa-2x" style="color: rgb(150, 149, 149);"></i>
+        <%= link_to user_path(@shizen.user.id) do %>
+                <% if @shizen.user.image.attached? %>
+                        <%= image_tag  @shizen.user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+                <% else %>
+                        <i class="fa-solid fa-user fa-2x" style="color: rgb(150, 149, 149);"></i>
+                <% end %>
+                <%= @shizen.user.name %>
         <% end %>
-<%= link_to @shizen.user.name, user_path(@shizen.user.id) %>
         <div class="show-user-info">
                 <% if user_signed_in? && current_user.id == @shizen.user_id %>
                         <%= button_to edit_shizen_path(@shizen.id), method: :get do %>
@@ -68,11 +71,10 @@
         <span class= "ken-tag"> 未登録 </span>
 <% end %>
 
-<p><%= @shizen.setumei %></p>
+<div class="setumei">
+        <%= @shizen.setumei %>
+</div>
 <br>
-<% if user_signed_in? && current_user.id == @shizen.user_id %>
-        <%= button_to "削除", shizen_path(@shizen.id), method: :delete %>
-<% end %>
 <div class="migisoroe">
         <% if user_signed_in? %>
                 <%= form_with(model: [@shizen, @comment], local: true) do |f| %>
@@ -99,7 +101,15 @@
 
 <h2>いいねしたユーザー</h2>
 <% @shizen.liked_users.each do |user| %>
-        <li><%= link_to user.name, user_path(user) %></li>
+        <%= link_to user_path(user.id) do %>
+                <% if user.image.attached? %>
+                        <%= image_tag  user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+                <% else %>
+                        <i class="fa-solid fa-user fa-2x" style="color: rgb(150, 149, 149);"></i>
+                <% end %>
+                <%= user.name %>
+        <% end %>
 <% end %>
 <br>
 <%= link_to "自然一覧に戻る", shizens_path %>
+</div>

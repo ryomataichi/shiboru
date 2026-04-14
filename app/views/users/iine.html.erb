@@ -115,7 +115,7 @@
                                         <%= t.user.name %>
                                     <% end %>
                                     <br>
-                                    <%= t.setumei %>
+                                    <%= smart_truncate(t.setumei, 17) %>
                                 </div>
                             </div>
                                 <%= link_to shizen_path(t.id) do %> 
