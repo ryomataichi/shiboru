@@ -1,18 +1,19 @@
-<% if @shizen.user.image.attached? %>
-        <%= image_tag  @shizen.user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
-<% else %>
-        <i class="fa-solid fa-user fa-2x" style="color: rgb(150, 149, 149);"></i>
-<% end %>
-<div class="hito">
-        <%= link_to @shizen.user.name, user_path(@shizen.user.id) %>
-</div>
-<div class="hennsyuu">
-        <% if user_signed_in? && current_user.id == @shizen.user_id %>
-                <%= button_to edit_shizen_path(@shizen.id), method: :get do %>
-                        <i class="fa-solid fa-gear fa-2x"></i>
-                <% end %>
+<div class="show-top">
+        <% if @shizen.user.image.attached? %>
+                <%= image_tag  @shizen.user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+        <% else %>
+                <i class="fa-solid fa-user fa-2x" style="color: rgb(150, 149, 149);"></i>
         <% end %>
+<%= link_to @shizen.user.name, user_path(@shizen.user.id) %>
+        <div class="show-user-info">
+                <% if user_signed_in? && current_user.id == @shizen.user_id %>
+                        <%= button_to edit_shizen_path(@shizen.id), method: :get do %>
+                                <i class="fa-solid fa-gear fa-2x"></i>
+                        <% end %>
+                <% end %>
+        </div>
 </div>
+
 <div class="shizens-container">
     <% if @shizen.tategazou.attached? %>
         <%= image_tag @shizen.tategazou,style: "border-radius: 0%; width: 360px; height: 480px; object-fit:cover;" %>
@@ -53,14 +54,20 @@
 <% else %>
   <p>現在の天気情報を取得できませんでした</p>
 <% end %>
-<p><%= @shizen.ken %></p>
-<span class="map-link">
-        <%= link_to @shizen.maplink do %>
-            <i class="fa-solid fa-location-dot fa-2xl"></i>
+
+        <% if @shizen.maplink? %>
+                <%= link_to @shizen.maplink do %>
+                        <i class="fa-solid fa-location-dot fa-2xl"></i>
+                <% end %>
+        <% else %>
+                <i class="fa-solid fa-location-dot fa-2xl" style="color: rgb(150, 149, 149);"></i>
         <% end %>
+<% if @shizen.ken.present? %>
         <%= link_to @shizen.ken, shizen_matome_path(@shizen.id), class: "ken-tag" %>
-</span>
-<p><%= link_to @shizen.user.name, user_path(@shizen.user.id) %></p>
+<% else %>
+        <span class= "ken-tag"> 未登録 </span>
+<% end %>
+
 <p><%= @shizen.setumei %></p>
 <br>
 <% if user_signed_in? && current_user.id == @shizen.user_id %>
