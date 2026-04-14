@@ -11,9 +11,6 @@ class Shizen < ApplicationRecord
     has_one_attached :yokogazou
     has_one_attached :yokogazou2
     before_create :refresh_hourly_weather!
-      
-private
-
   def refresh_hourly_weather!
     result = WeatherFetcher.fetch_next_hour(latitude, longitude)
     return false if result.nil?
