@@ -54,13 +54,13 @@ class WeatherFetcher
     now = Time.current.beginning_of_hour
 
     pair = times.zip(codes).find do |time_str, _code|
-      Time.parse(time_str) >= now
+      Time.zone.parse(time_str) >= now
     end
     return nil if pair.nil?
 
     {
       weather_type: classify_weather(pair[1]),
-      weather_at: Time.parse(pair[0])
+      weather_at: Time.zone.parse(pair[0])
     }
   rescue OpenSSL::SSL::SSLError => e
     Rails.logger.error("WeatherFetcher SSL error: #{e.message}")
