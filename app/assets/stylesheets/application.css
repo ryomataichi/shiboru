@@ -122,6 +122,8 @@ header li {
 .deka_table{
     display: flex;
     width: fit-content;
+    margin-left: auto;
+    margin-right: 2%;
 }
 .follow_table{
     display: flex;
@@ -183,7 +185,7 @@ header li {
     align-items: end;
 }
 
-#qr-modal {
+#qr-modal{
   position: fixed;
   top: 50%;
   left: 50%;
@@ -193,4 +195,10 @@ header li {
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   z-index: 999;
+}
+
+.kesi-button button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
