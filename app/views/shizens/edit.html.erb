@@ -26,6 +26,9 @@
             <%= f.label :横画像2 %>
             <%= f.file_field :yokogazou2, :size => 100 %> 
             <br>
+    <%= f.label :テスト。画像複数 %>
+    <%= f.file_field :images, multiple: true, :size => 140 %> 
+    <br>
             <%= f.submit "編集する" %>
         <% end %>
         <% if user_signed_in? && current_user.id == @shizen.user_id %>

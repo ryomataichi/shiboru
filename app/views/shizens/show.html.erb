@@ -30,7 +30,16 @@
     <% if @shizen.yokogazou2.attached? %>
         <%= image_tag @shizen.yokogazou2,style: "border-radius: 0%; width: 640px; height: 480px; object-fit:cover;" %>
     <% end %>
+        <% @shizen.images.each do |image| %>
+        <% orientation = image_orientation(image) %>
+                <div class="photo <%= orientation %>">
+                        <%= image_tag image %>
+                        <br>
+                </div>
+        <% end %>
 </div>
+
+
 
 <div class="migisoroe">
         <% if user_signed_in? %>

@@ -90,6 +90,6 @@ class ShizensController < ApplicationController
     end
     private
     def shizen_params
-        params.require(:shizen).permit(:tategazou, :tategazou2, :yokogazou, :yokogazou2, :spot_name, :ken, :maplink, :setumei, :latitude, :longitude, :hourly_weather_type, :hourly_weather_at, :hourly_weather_checked_at)
+        params.require(:shizen).permit(:tategazou, :tategazou2, :yokogazou, :yokogazou2, :spot_name, :ken, :maplink, :setumei, :latitude, :longitude, :hourly_weather_type, :hourly_weather_at, :hourly_weather_checked_at, images: [])
     end
 end

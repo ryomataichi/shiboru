@@ -10,6 +10,7 @@ class Shizen < ApplicationRecord
     has_one_attached :tategazou2
     has_one_attached :yokogazou
     has_one_attached :yokogazou2
+    has_many_attached :images
     before_create :refresh_hourly_weather!
   def refresh_hourly_weather!
     result = WeatherFetcher.fetch_next_hour(latitude, longitude)
@@ -21,4 +22,5 @@ class Shizen < ApplicationRecord
     hourly_weather_checked_at: Time.current
     )
   end
+
 end

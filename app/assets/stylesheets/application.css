@@ -202,3 +202,29 @@ header li {
   border: none;
   cursor: pointer;
 }
+
+.photo {
+  overflow: hidden;
+}
+
+.photo.landscape {
+  width: 640px;
+  height: 480px;
+}
+
+.photo.portrait {
+  width: 360px;
+  height: 480px;
+}
+
+.photo.square {
+  width: 480px;
+  height: 480px;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
