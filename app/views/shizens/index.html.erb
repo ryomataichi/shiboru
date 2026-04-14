@@ -145,7 +145,7 @@
                                 <%= t.user.name %>
                             <% end %>
                         <br>
-                        <%= t.setumei %>
+                        <%= link_to smart_truncate(t.setumei, 10), shizen_path(t.id)  %>
                     </div>
                     <%= link_to shizen_path(t.id) do %> 
                         <% if t.tategazou.attached? %>

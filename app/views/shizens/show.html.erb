@@ -54,7 +54,12 @@
   <p>現在の天気情報を取得できませんでした</p>
 <% end %>
 <p><%= @shizen.ken %></p>
-<p><%= link_to "グーグルマップ", @shizen.maplink if @shizen.maplink? %></p>
+                            <span class="map-link">
+                                <%= link_to t.maplink do %>
+                                    <i class="fa-solid fa-location-dot fa-2xl"></i>
+                                <% end %>
+                                <%= link_to t.ken, shizen_matome_path(t.id), class: "ken-tag" %>
+                            </span>
 <p><%= link_to @shizen.user.name, user_path(@shizen.user.id) %></p>
 <p><%= @shizen.setumei %></p>
 <br>
