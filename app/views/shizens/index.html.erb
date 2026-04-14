@@ -129,23 +129,23 @@
                                 <i class="fa-regular fa-heart"></i><%= t.likes.count %>
                             <% end %>
                         </span>
-                            <span class="map-link">
-                                <%= link_to t.maplink do %>
-                                    <i class="fa-solid fa-location-dot fa-2xl"></i>
-                                <% end %>
-                                <%= link_to t.ken, shizen_matome_path(t.id), class: "ken-tag" %>
-                            </span>
-                        <br>
-                            <%= link_to user_path(t.user.id) do %>
-                                <% if t.user.image.attached? %>
-                                    <%= image_tag t.user.image,style: "border-radius: 50%; width: 36px; height: 36px; object-fit:cover;" %>
-                                <% else %>
-                                    <i class="fa-solid fa-user" style="color: rgb(150, 149, 149);"></i>
-                                <% end %>
-                                <%= t.user.name %>
+                        <span class="map-link">
+                            <%= link_to t.maplink do %>
+                                <i class="fa-solid fa-location-dot fa-2xl"></i>
                             <% end %>
-                        <br>
-                        <%= link_to smart_truncate(t.setumei, 8), shizen_path(t.id)  %>
+                            <%= link_to t.ken, shizen_matome_path(t.id), class: "ken-tag" %>
+                        </span>
+                    <br>
+                        <%= link_to user_path(t.user.id) do %>
+                            <% if t.user.image.attached? %>
+                                <%= image_tag t.user.image,style: "border-radius: 50%; width: 36px; height: 36px; object-fit:cover;" %>
+                            <% else %>
+                                <i class="fa-solid fa-user" style="color: rgb(150, 149, 149);"></i>
+                            <% end %>
+                            <%= t.user.name %>                            
+                        <% end %>
+                    <br>
+                    <%= smart_truncate(t.setumei, 17) %>
                     </div>
                     <%= link_to shizen_path(t.id) do %> 
                         <% if t.tategazou.attached? %>
