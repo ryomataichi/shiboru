@@ -11,8 +11,7 @@ class Shizen < ApplicationRecord
     has_one_attached :yokogazou
     has_one_attached :yokogazou2
     before_create :refresh_hourly_weather!
-    validate :maplink_must_not_be_short_google_url
-  
+      
 private
 
   def refresh_hourly_weather!
@@ -24,13 +23,5 @@ private
     hourly_weather_at: result[:weather_at],
     hourly_weather_checked_at: Time.current
     )
-  end
-
-  def maplink_must_not_be_short_google_url
-    return if maplink.blank?
-
-    if maplink.include?("maps.app.goo.gl")
-      errors.add(:maplink, "短縮URLではなく、Google Mapsの通常URLを貼ってください")
-    end
   end
 end

@@ -28,7 +28,8 @@ class ShizensController < ApplicationController
         if shizen.save
         redirect_to action: "index"
         else
-        render :new, status: :unprocessable_content        end
+        redirect_to action: "new"       
+        end
     end
 
     def edit
@@ -59,7 +60,7 @@ class ShizensController < ApplicationController
             shizen.refresh_hourly_weather! if shizen.latitude.present? && shizen.longitude.present?
             redirect_to action: "show", id: shizen.id
         else
-            render :edit, status: :unprocessable_content
+            redirect_to action: "edit", id: shizen.id
         end
     end
     
