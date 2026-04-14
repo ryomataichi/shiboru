@@ -30,13 +30,19 @@
     <% if @shizen.yokogazou2.attached? %>
         <%= image_tag @shizen.yokogazou2,style: "border-radius: 0%; width: 640px; height: 480px; object-fit:cover;" %>
     <% end %>
-        <% @shizen.images.each do |image| %>
-        <% orientation = image_orientation(image) %>
-                <div class="photo <%= orientation %>">
-                        <%= image_tag image %>
-                        <br>
-                </div>
-        <% end %>
+<% @shizen.images.each do |image| %>
+  <% orientation = image_orientation(image) %>
+
+  <p>
+    orientation: <%= orientation %>,
+    width: <%= image.blob.metadata["width"] %>,
+    height: <%= image.blob.metadata["height"] %>
+  </p>
+
+  <div class="photo <%= orientation %>">
+    <%= image_tag image %>
+  </div>
+<% end %>
 </div>
 
 
