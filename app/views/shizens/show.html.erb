@@ -18,31 +18,25 @@
 </div>
 
 <div class="shizens-container">
-    <% if @shizen.tategazou.attached? %>
-        <%= image_tag @shizen.tategazou,style: "border-radius: 0%; width: 360px; height: 480px; object-fit:cover;" %>
-    <% end %>
-    <% if @shizen.yokogazou.attached? %>
-        <%= image_tag @shizen.yokogazou,style: "border-radius: 0%; width: 640px; height: 480px; object-fit:cover;" %>
-    <% end %>
-    <% if @shizen.tategazou2.attached? %>
-        <%= image_tag @shizen.tategazou2,style: "border-radius: 0%; width: 360px; height: 480px; object-fit:cover;" %>
-    <% end %>
-    <% if @shizen.yokogazou2.attached? %>
-        <%= image_tag @shizen.yokogazou2,style: "border-radius: 0%; width: 640px; height: 480px; object-fit:cover;" %>
-    <% end %>
-<% @shizen.images.each do |image| %>
-  <% orientation = image_orientation(image) %>
-
-  <p>
-    orientation: <%= orientation %>,
-    width: <%= image.blob.metadata["width"] %>,
-    height: <%= image.blob.metadata["height"] %>
-  </p>
-
-  <div class="photo <%= orientation %>">
-    <%= image_tag image %>
-  </div>
-<% end %>
+        <% if @shizen.tategazou.attached? %>
+                <%= image_tag @shizen.tategazou,style: "border-radius: 0%; width: 360px; height: 480px; object-fit:cover;" %>
+        <% end %>
+        <% if @shizen.yokogazou.attached? %>
+                <%= image_tag @shizen.yokogazou,style: "border-radius: 0%; width: 640px; height: 480px; object-fit:cover;" %>
+        <% end %>
+        <% if @shizen.tategazou2.attached? %>
+                <%= image_tag @shizen.tategazou2,style: "border-radius: 0%; width: 360px; height: 480px; object-fit:cover;" %>
+        <% end %>
+        <% if @shizen.yokogazou2.attached? %>
+                <%= image_tag @shizen.yokogazou2,style: "border-radius: 0%; width: 640px; height: 480px; object-fit:cover;" %>
+        <% end %>
+        <% @shizen.images.each do |image| %>
+                <% orientation = image_orientation(image) %>
+                <div class="photo <%= orientation %>">
+                        <%= image_tag image %>
+                        <br>
+                </div>
+        <% end %>
 </div>
 
 
