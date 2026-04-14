@@ -14,21 +14,9 @@
             <%= f.label :説明文 %>
             <%= f.text_field :setumei, :size => 100, class: 'editer'%> 
             <br>
-            <%= f.label :縦画像 %>
-            <%= f.file_field :tategazou, :size => 100 %> 
+            <%= f.label :画像複数 %>
+            <%= f.file_field :images, multiple: true, :size => 140 %> 
             <br>
-            <%= f.label :縦画像2 %>
-            <%= f.file_field :tategazou2, :size => 100 %> 
-            <br>
-            <%= f.label :横画像 %>
-            <%= f.file_field :yokogazou, :size => 100 %> 
-            <br>
-            <%= f.label :横画像2 %>
-            <%= f.file_field :yokogazou2, :size => 100 %> 
-            <br>
-    <%= f.label :テスト。画像複数 %>
-    <%= f.file_field :images, multiple: true, :size => 140 %> 
-    <br>
             <%= f.submit "編集する" %>
         <% end %>
         <% if user_signed_in? && current_user.id == @shizen.user_id %>
