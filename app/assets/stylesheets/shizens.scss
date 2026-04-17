@@ -346,3 +346,26 @@ margin-right: 2%;
   color: #fff;
   cursor: pointer;
 }
+
+@media (max-width: 640px) {
+  .account-edit-page {
+    padding: 24px 12px;
+  }
+
+  .account-edit-card {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .account-edit-card h3 {
+    font-size: 24px;
+  }
+
+  .form_input,
+  .form_textarea,
+  .form_file,
+  .submit_button,
+  .delete_image_button {
+    font-size: 14px;
+  }
+}

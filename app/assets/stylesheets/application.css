@@ -105,25 +105,22 @@ header li {
     justify-content: center;
 }
 
-.edit{
-    font-size: 22px;
-    width: 40%;
-    border: solid 1px;
-}
 .editer{
-    inline-size: 80%;
-    word-break: break-all;
-    overflow-wrap: break-word;
-    width: 80%;
-    height: 50px;
-    background: white;
-    border: solid 1px rgb(108, 103, 103);
+  width: 100%;
+  min-height: 150px;
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  background: #fff;
+  box-sizing: border-box;
+  resize: vertical;
+  line-height: 1.6;
 }
 .deka_table{
     display: flex;
     width: fit-content;
     margin-left: auto;
-    margin-right: 2%;
+    margin-right: auto;
 }
 .follow_table{
     display: flex;

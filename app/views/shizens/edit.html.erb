@@ -39,7 +39,7 @@
         <% if user_signed_in? && current_user.id == @shizen.user_id %>
                 <%= button_to "削除", shizen_path(@shizen.id), class: "delete_image_button", method: :delete %>
         <% end %>
-      </div>
+        </div>
   </div>
   <div class="image_card">
     <div class="form_row full">

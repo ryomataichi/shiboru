@@ -6,11 +6,13 @@
             <i class="fa-solid fa-user fa-8x" style="color: rgb(150, 149, 149);"></i>
         <% end %>
     <br><br><br><br>
-        <span class="linku">
-            <span class="hyouzityuu"><%= link_to "あなたの投稿", user_path(current_user.id) %></span>
-            <br><br><br>
-            <span class="hihyouzi"><%= link_to "いいねした投稿", users_iine_path(id: @user.id) %></span>
-        </span>
+        <% if current_user.id == @user.id %>
+            <span class="linku">
+                <span class="hyouzityuu"><%= link_to "あなたの投稿", user_path(current_user.id) %></span>
+                <br><br><br>
+                <span class="hihyouzi"><%= link_to "いいねした投稿", users_iine_path(id: @user.id) %></span>
+            </span>
+        <% end %>
     </div>
     <div class="migihanbun">
         <div class="prohu">
@@ -55,7 +57,8 @@
                             <i class="fa-solid fa-arrow-right-from-bracket fa-3x"></i>
                     <% end %>
                 </div>
-            <% end %></div>
+            <% end %>
+        </div>
         <div class="setumei">
             <%= @user.profile %>
         </div>

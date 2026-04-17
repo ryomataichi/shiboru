@@ -90,3 +90,195 @@
   font-weight: bold;
   color: black;
 }
+
+.account-edit-page {
+  min-height: 100vh;
+  padding: 48px 20px;
+  background: linear-gradient(180deg, #f4f8ff 0%, #eef7f2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.account-edit-card {
+  width: 100%;
+  max-width: 760px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 36px 32px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.account-edit-card h3 {
+  margin: 0 0 28px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #1f2937;
+  text-align: center;
+}
+
+.account-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.form_row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form_label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.form_input,
+.form_textarea,
+.form_file {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  background: #fff;
+  font-size: 15px;
+  color: #111827;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form_input:focus,
+.form_textarea:focus,
+.form_file:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.16);
+}
+
+.form_textarea {
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.form_hint {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.form_notice {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 14px;
+}
+
+.form_actions {
+  margin-top: 8px;
+}
+
+.submit_button {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 18px;
+  background: linear-gradient(90deg, #34d399 0%, #60a5fa 50%, #a78bfa 100%);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 10px 24px rgba(96, 165, 250, 0.22);
+}
+
+.submit_button:hover {
+  transform: translateY(-1px);
+}
+
+.account_links {
+  margin-top: 22px;
+  text-align: center;
+}
+
+.back_link {
+  color: #4b5563;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back_link:hover {
+  text-decoration: underline;
+}
+
+.danger_zone {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.delete_image_button {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  background: #ef4444;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.delete_image_button:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* エラーメッセージ用に少し整える */
+#error_explanation {
+  margin-bottom: 8px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+#error_explanation h2 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: #b91c1c;
+}
+
+#error_explanation ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #7f1d1d;
+}
+
+@media (max-width: 640px) {
+  .account-edit-page {
+    padding: 24px 12px;
+  }
+
+  .account-edit-card {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .account-edit-card h3 {
+    font-size: 24px;
+  }
+
+  .form_input,
+  .form_textarea,
+  .form_file,
+  .submit_button,
+  .delete_image_button {
+    font-size: 14px;
+  }
+}
