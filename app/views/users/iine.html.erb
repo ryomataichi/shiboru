@@ -14,9 +14,7 @@
     </div>
     <div class="migihanbun">
         <div class="prohu">
-            <h1><%= @user.name %></h1>
-            <%= @user.profile %>
-            <br>
+            <span class="user-name"><%= @user.name %></span>
             <div class="deka_table">
                 <div class="follow_table">
                         <p><%= link_to @user.followings.count, user_followings_path(@user) %></p>
@@ -27,11 +25,10 @@
                         <f>フォロワー</f>
                 </div>
             </div>
-            <button id="qr-button">QRコード表示</button>
+            <div class="kesi-button"><button id="qr-button"><i class="fa-solid fa-qrcode fa-3x"></i></button></div>
             <div id="qr-modal" class="hidden">
                 <%= raw RQRCode::QRCode.new(request.original_url).as_svg(module_size: 4) %>
             </div>
-            <br><br><br>
             <% if current_user != @user %>
                 <td><%= render "relationships/btn", user: @user, options: { class: ""} %></td>
                 <% if @isRoom == true %>
@@ -49,15 +46,23 @@
                     <i class="fa-solid fa-user-gear fa-2x"></i>
                 <% end %>
                 <%= link_to users_dmitiran_path(id: @user.id), method: :get do %>
-                    <i class="fa-solid fa-paper-plane"></i>
+                    <i class="fa-solid fa-paper-plane fa-2x"></i>
                 <% end %>
             <% end %>
             <% if current_user.id == @user.id %>
-                <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
-            <% end %>
+                <div class="kesi-button">
+                    <%= button_to destroy_user_session_path, method: :delete do %>
+                            <i class="fa-solid fa-arrow-right-from-bracket fa-3x"></i>
+                    <% end %>
+                </div>
+            <% end %></div>
+        <div class="setumei">
+            <%= @user.profile %>
         </div>
+        
+        <br>
         <div class="shizen-container">
-            <% @user.liked_shizens.each do |t| %>
+            <% @user.shizens.each do |t| %>
                     <div class="shizen">
                         <div class="shizen-content">
                             <div class="shizen-text">
@@ -119,8 +124,12 @@
                                 </div>
                             </div>
                             <%= link_to shizen_path(t.id) do %> 
-                                <% if t.images.attached? %>
-                                    <div class="shizen-image"><%= image_tag t.images.first,style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %></div> 
+                                <%= link_to shizen_path(t.id) do %> 
+                                    <% if t.images.attached? %>
+                                        <div class="shizen-image"><%= image_tag t.images.first,style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %></div> 
+                                    <% else %>
+                                        <div class="shizen-image"><%= image_tag "no_image.jpeg", style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %></div>
+                                    <% end %>
                                 <% end %>
                             <% end %>
                         </div>
