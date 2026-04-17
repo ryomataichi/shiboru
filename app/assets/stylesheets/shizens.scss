@@ -116,7 +116,7 @@ a{
 }
 .search-wrapper {
 display: flex;
-justify-content: flex-end;
+justify-content: space-between;
 position: relative;
 font-size: 20px;
 width: 100%;
@@ -129,7 +129,7 @@ padding-left: 1%;
   align-items: flex-end;
   position: relative;
   font-size: 20px;
-  width: 100%;
+  width: 70%;
   padding-left: 1%;
 }
 
@@ -392,5 +392,14 @@ margin-right: 2%;
   .setumei {
   background-color: #e4e2e2;
   margin-right: 3.6%;
+}
+.search-migi{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  position: relative;
+  font-size: 20px;
+  width: 35%;
+  padding-right: 2%;
 }
 }
