@@ -187,12 +187,30 @@ header li {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   z-index: 999;
 }
+
+.qr-bg {
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  object-fit: cover;
+  width: 1150px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.qr-code {
+  position: relative;
+  z-index: 2;
+  background: white;
+  padding: 7px;
+  border-radius: 16px;
+}
+
 
 .kesi-button button {
   background: none;
