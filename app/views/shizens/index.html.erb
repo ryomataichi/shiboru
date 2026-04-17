@@ -140,18 +140,10 @@
                     <%= smart_truncate(t.setumei, 17) %>
                     </div>
                     <%= link_to shizen_path(t.id) do %> 
-                        <% if t.tategazou.attached? %>
-                            <div class="shizen-image"><%= image_tag t.tategazou,style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %></div> 
-                        <% elsif t.yokogazou.attached? %>
-                            <div class="shizen-image"><%= image_tag t.yokogazou,style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %></div>
-                        <% elsif t.tategazou2.attached? %>
-                            <div class="shizen-image"><%= image_tag t.tategazou2,style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %></div>
-                        <% elsif t.yokogazou2.attached? %>
-                            <div class="shizen-image"><%= image_tag t.yokogazou2,style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %></div>
-                        <% else %>
-                            <div class="shizen-image"><%= image_tag "no_image.png",style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %></div>
+                        <% if t.images.attached? %>
+                            <div class="shizen-image"><%= image_tag t.images.first,style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %></div> 
                         <% end %>
-                    <% end %>
+                    <% end %>                
                 </div>
             </div>
         <% end %>
