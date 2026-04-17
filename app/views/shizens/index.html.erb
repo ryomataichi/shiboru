@@ -7,13 +7,14 @@
         <%= link_to '新しい順', shizens_path(new:"new")%> | 
         <%= link_to '古い順', shizens_path(old:"old")%> | 
         <%= link_to '評価の高い順', shizens_path(good:"good")%>
-
-        <span id="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <div id="search-form" class="hidden">
-            <%= form_tag({controller:"shizens",action:"index"}, method: :get) do %>
-                <%= text_field_tag :search %>
-                <%= submit_tag '検索する'  %>
-            <% end %>
+        <div class="search-migi">
+            <span id="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <div id="search-form" class="hidden">
+                <%= form_tag({controller:"shizens",action:"index"}, method: :get) do %>
+                    <%= text_field_tag :search %>
+                    <%= submit_tag '検索する'  %>
+                <% end %>
+            </div>
         </div>
     </div>
     <div class="shizens-container">

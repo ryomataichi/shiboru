@@ -4,7 +4,8 @@ import "controllers"
 document.addEventListener("turbo:load", () => {
   const icon = document.getElementById("search-icon");
   const form = document.getElementById("search-form");
-  const btn = document.getElementById("qr-button");
+  const openQrBtn = document.getElementById("open-qr-button");
+  const closeQrBtn = document.getElementById("close-qr-button");
   const modal = document.getElementById("qr-modal");
 
   if (icon && form) {
@@ -21,9 +22,15 @@ document.addEventListener("turbo:load", () => {
     });
   }
 
-  if (btn && modal) {
-    btn.addEventListener("click", () => {
-      modal.classList.toggle("hidden");
+  if (openQrBtn && modal) {
+    openQrBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+  }
+
+  if (closeQrBtn && modal) {
+    closeQrBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
     });
   }
 });

@@ -12,6 +12,11 @@
   overflow-y: scroll;
   align-items: center;
 }
+
+ .migihanbun i{
+  font-size: 32px;
+ }
+
 .saidai{
   max-height: calc(100vh - 80px);
   display: flex;
@@ -68,26 +73,40 @@
 
 }
 .linku{
-    font-size: 20px;
-    color: #555;
-            margin-bottom: 10px; /* ←ここで文字と線の距離調整 */
-  padding-bottom: 10px; /* ←線との余白 */
-
-  border-bottom: 2px solid #d1d5db; /* 灰色ライン */
+  font-size: 20px;
+  color: #555;
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;     
+  justify-content: center;    
+  align-items: center;         
+  height: 400px;               
+  gap: 20px;  
 }
+
 .prohu {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  font-size: 20px;
+  padding-top: 3%;
+}
+
+.sonota {
   display: flex;
   justify-content: flex-end;
   position: relative;
   font-size: 20px;
   width: 100%;
   padding-top: 1%;
-
 }
 
 .prohu .user-name {
+  position: relative;
   font-size: 300%;
   font-weight: bold;
+  top: -12px;
+  left: 0%;
   color: black;
 }
 
@@ -137,19 +156,13 @@
   color: #374151;
 }
 
-.form_input,
-.form_textarea,
-.form_file {
-  width: 100%;
-  padding: 14px 16px;
-  border: 1px solid #d1d5db;
-  border-radius: 14px;
-  background: #fff;
-  font-size: 15px;
-  color: #111827;
-  box-sizing: border-box;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
+  .form_input,
+  .form_textarea,
+  .form_file,
+  .submit_button,
+  .delete_image_button {
+    font-size: 14px;
+  }
 
 .form_input:focus,
 .form_textarea:focus,
@@ -260,25 +273,317 @@
   color: #7f1d1d;
 }
 
-@media (max-width: 640px) {
+.cansel-button {
+  position: absolute;
+  top: -300px;
+  right: -495px;
+  z-index: 1001;
+}
+
+.cansel-button button {
+  background: none;
+  border: none;
+  color: white;
+  z-index: 999;
+}
+
+.user-image{
+  margin-top: 3%;
+  margin-left: 13%;
+  border-radius: 50%; 
+  width: 200px; 
+  height: 200px; 
+  object-fit:cover;
+}
+
+
+
+@media (max-width: 768px) {
+  .migihanbun{
+  height: 100%;
+  margin-top: 0.9%;
+  margin-right: 0.9%;
+  margin-bottom: 0.9%;
+  background-color: #ffffff;
+  overflow-y: scroll;
+  align-items: center;
+}
+ .migihanbun i{
+  font-size: 16px;
+ }
+.saidai{
+  height: 100%;
+  display: flex;
+  margin-right: 0.9%;
+  background-color: #d2d1d1;
+}
+.hidarihanbun{
+    padding-top: 0.9%;
+    padding-left: 0.9%;
+    width: 27%;
+    align-items: baseline;
+}
+.hidarihanbun a{
+  font-size: 15px;
+}
+.shizen-container{
+  height: auto;
+  overflow-y: scroll;
+}
+.shizen{
+    background-color: #ffffff;
+    border-radius: 18px;
+    margin: 0 auto;
+}
+
+.shizen-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 3.6px;
+}
+
+
+
+.spot-name {
+    font-size: 180%;
+    font-weight: bold;
+    margin-top: 0.9px;
+    color: black;
+    margin-bottom: 0.9px; /* ←ここで文字と線の距離調整 */
+  padding-bottom: 0.9px; /* ←線との余白 */
+
+  border-bottom: 1.8px solid #d1d5db; /* 灰色ライン */
+}
+.oya-hourly-weather {
+    margin-top: 1.8px;
+    display: flex;
+    align-items: baseline;
+}
+.hourly-weather {
+    margin-top: 4.5px;
+    font-size: 18px;
+    color: #555;
+        margin-bottom: 9px; /* ←ここで文字と線の距離調整 */
+  padding-bottom: 9px; /* ←線との余白 */
+
+  border-bottom: 1.8px solid #d1d5db; /* 灰色ライン */
+
+}
+.linku{
+  margin-top: 10%;
+display: flex;
+  flex-direction: column;     
+  justify-content: center;    
+  align-items: center;         
+  height: 400px;               
+  font-size: 18px;
+  color: #555;
+  gap: 20px;   
+}
+
+.prohu {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  font-size: 20px;
+  padding-top: 3%;
+}
+
+.sonota {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  font-size: 20px;
+  width: 100%;
+  padding-top: 1%;
+}
+
+.prohu .user-name {
+  position: relative;
+  font-size: 230%;
+  font-weight: bold;
+  top: -12px;
+  color: black;
+}
+
   .account-edit-page {
-    padding: 24px 12px;
+    padding: 21.6px 10.8px;
   }
 
   .account-edit-card {
-    padding: 24px 18px;
-    border-radius: 18px;
+    padding: 21.6px 10.8px;
+    border-radius: 10.8px;
   }
 
   .account-edit-card h3 {
-    font-size: 24px;
+    font-size: 21.6px;
   }
 
-  .form_input,
-  .form_textarea,
-  .form_file,
-  .submit_button,
-  .delete_image_button {
-    font-size: 14px;
-  }
+.account-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 19.8px;
 }
+
+.form_row {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.form_label {
+  font-size: 13.5px;
+  font-weight: 630;
+  color: #374151;
+}
+
+.form_input,
+.form_textarea,
+.form_file {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  background: #fff;
+  font-size: 15px;
+  color: #111827;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form_input:focus,
+.form_textarea:focus,
+.form_file:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.16);
+}
+
+.form_textarea {
+  min-height: 135px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.form_hint {
+  margin: 0;
+  font-size: 11.7px;
+  color: #6b7280;
+}
+
+.form_notice {
+  padding: 10.8px 12.6px;
+  border-radius: 10.8px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 12.6px;
+}
+
+.form_actions {
+  margin-top: 7.2px;
+}
+
+.submit_button {
+  width: 90%;
+  border: none;
+  border-radius: 999px;
+  padding: 13.6px 16.2px;
+  background: linear-gradient(90deg, #34d399 0%, #60a5fa 50%, #a78bfa 100%);
+  color: #fff;
+  font-size: 14.4px;
+  font-weight: 630;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 10px 24px rgba(96, 165, 250, 0.22);
+}
+
+.submit_button:hover {
+  transform: translateY(-1px);
+}
+
+.account_links {
+  margin-top: 19.8px;
+  text-align: center;
+}
+
+.back_link {
+  color: #4b5563;
+  text-decoration: none;
+  font-weight: 540;
+}
+
+.back_link:hover {
+  text-decoration: underline;
+}
+
+.danger_zone {
+  margin-top: 28.8px;
+  padding-top: 21.6px;
+  border-top: 0.9px solid #e5e7eb;
+}
+
+.delete_image_button {
+  width: 90%;
+  border: none;
+  border-radius: 10.8px;
+  padding: 10.8px 14.4px;
+  background: #ef4444;
+  color: #fff;
+  font-weight: 630;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.delete_image_button:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* エラーメッセージ用に少し整える */
+#error_explanation {
+  margin-bottom: 7.2px;
+  padding: 12.6px 14.4px;
+  border-radius: 12.6px;
+  background: #fef2f2;
+  border: 0.9px solid #fecaca;
+}
+
+#error_explanation h2 {
+  margin: 0 0 7.2px;
+  font-size: 13.5px;
+  color: #b91c1c;
+}
+
+#error_explanation ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #7f1d1d;
+}
+
+.cansel-button {
+  position: absolute;
+  top: -270px;
+  right: -445.5px;
+  z-index: 1001;
+}
+
+.cansel-button button {
+  background: none;
+  border: none;
+  color: white;
+  z-index: 999;
+}
+
+  .user-image{
+    margin-top: 3%;
+    margin-left: 10%;
+  border-radius: 50%; 
+  width: 80px !important; 
+  height: 80px !important; 
+  object-fit:cover;
+}
+}
+
+
+
