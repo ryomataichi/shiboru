@@ -1,26 +1,43 @@
 <div class="edit_container">
-<div class="edit">
-<h3>新規投稿ページ</h3>
-<%= form_for @shizen do |f| %>
-<%= f.label :場所名 %>
-    <%= f.text_field :spot_name, :size => 10 %> 
-    <br>
-    <%= f.label :都道府県 %>
-    <%= f.text_field :ken, :size => 4 %> 
-    <br>
-    <%= f.label :グーグルマップのリンク %>
-    <%= f.text_field :maplink, :size => 25 %>
-    <br>
-    <%= f.label :説明文 %>
-    <%= f.text_field :setumei, :size => 100, class: 'editer'%> 
-    <br>
-    <%= f.label :画像 %>
-    <%= f.file_field :images, multiple: true, :size => 140 %> 
-    <br>
+  <div class="edit_card">
+    <div class="edit_header">
+      <h2>新規投稿</h2>
+      <p>自然のきれいなスポットをシェアしよう</p>
+    </div>
 
-    <%= f.submit "投稿する" %>
-<% end %>
-<br>
-<%= link_to "一覧に戻る", shizens_path %>
-</div>
+    <%= form_with model: @shizen, local: true, html: { class: "post_form" } do |f| %>
+      <div class="form_grid">
+        <div class="form_row">
+          <%= f.label :spot_name, "場所名", class: "form_label" %>
+          <%= f.text_field :spot_name, class: "form_input", placeholder: "例：白馬岩岳マウンテンリゾート" %>
+        </div>
+
+        <div class="form_row short">
+          <%= f.label :ken, "都道府県", class: "form_label" %>
+          <%= f.text_field :ken, class: "form_input", placeholder: "例：長野県" %>
+        </div>
+
+        <div class="form_row">
+          <%= f.label :maplink, "Googleマップのリンク", class: "form_label" %>
+          <%= f.url_field :maplink, class: "form_input", placeholder: "https://maps.app.goo.gl/..." %>
+        </div>
+
+        <div class="form_row full">
+          <%= f.label :setumei, "説明文", class: "form_label" %>
+          <%= f.text_area :setumei, class: "form_textarea", rows: 6, placeholder: "スポットの魅力やおすすめの時間帯を書いてください" %>
+        </div>
+
+        <div class="form_row full">
+          <%= f.label :images, "画像", class: "form_label" %>
+          <%= f.file_field :images, multiple: true, class: "form_file" %>
+          <p class="form_hint">複数枚アップロードできます</p>
+        </div>
+      </div>
+
+      <div class="form_actions">
+        <%= link_to "一覧に戻る", shizens_path, class: "back_link" %>
+        <%= f.submit "投稿する", class: "submit_button" %>
+      </div>
+    <% end %>
+  </div>
 </div>

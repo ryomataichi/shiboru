@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :shizens do
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create]
+    member do
+      delete :purge_image
+    end
   end
 
   get 'shizens/:shizen_id/likes' => 'likes#create'

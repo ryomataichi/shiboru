@@ -32,18 +32,13 @@ module ShizensHelper
   end
 
   def image_orientation(image)
-    width = image.blob.metadata["width"]
-    height = image.blob.metadata["height"]
+    metadata = image.metadata
+    width = metadata["width"].to_i
+    height = metadata["height"].to_i
 
-    return "unknown" if width.blank? || height.blank?
-
-    if width > height
-      :landscape
-    elsif height > width
-      :portrait
-    else
-      :square
-    end
+    return "unknown" if width.zero? || height.zero?
+    return "square" if width == height
+    return "landscape" if width > height
+    "portrait"
   end
-
 end

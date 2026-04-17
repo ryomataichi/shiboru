@@ -34,6 +34,9 @@ class ShizensController < ApplicationController
 
     def edit
         @shizen = Shizen.find(params[:id])
+        @shizen.images.each do |image|
+            image.analyze unless image.analyzed?
+        end
     end
 
     def show
@@ -41,6 +44,9 @@ class ShizensController < ApplicationController
         @comments = @shizen.comments
         @comment = Comment.new
         @weather_type = WeatherFetcher.fetch_current(@shizen.latitude, @shizen.longitude)
+        @shizen.images.each do |image|
+            image.analyze unless image.analyzed?
+        end
     end
 
     def destroy
@@ -51,16 +57,20 @@ class ShizensController < ApplicationController
     
     def update
         shizen = Shizen.find(params[:id])
-        update_params = shizen_params
+        update_params = shizen_params.except(:images)
 
         latitude, longitude = MapLinkParser.extract_coordinates(update_params[:maplink])
         update_params = update_params.merge(latitude: latitude, longitude: longitude)
 
         if shizen.update(update_params)
+            if params[:shizen][:images].present? && params[:shizen][:images] != [""]
+            shizen.images.attach(params[:shizen][:images])
+            end
+
             shizen.refresh_hourly_weather! if shizen.latitude.present? && shizen.longitude.present?
             redirect_to action: "show", id: shizen.id
         else
-            redirect_to action: "edit", id: shizen.id
+            render :edit, status: :unprocessable_entity
         end
     end
     
@@ -82,6 +92,14 @@ class ShizensController < ApplicationController
 
     end
 
+    def purge_image
+        @shizen = Shizen.find(params[:id])
+        attachment = @shizen.images.attachments.find(params[:image_id])
+        attachment.purge
+
+        redirect_to edit_shizen_path(@shizen), notice: "画像を削除しました"
+    end
+
     def refresh_weather
         return head :unauthorized unless params[:token] == ENV["CRON_SECRET"]
 
@@ -90,6 +108,6 @@ class ShizensController < ApplicationController
     end
     private
     def shizen_params
-        params.require(:shizen).permit(:tategazou, :tategazou2, :yokogazou, :yokogazou2, :spot_name, :ken, :maplink, :setumei, :latitude, :longitude, :hourly_weather_type, :hourly_weather_at, :hourly_weather_checked_at, images: [])
+        params.require(:shizen).permit(:spot_name, :ken, :maplink, :setumei, :latitude, :longitude, :hourly_weather_type, :hourly_weather_at, :hourly_weather_checked_at, images: [])
     end
 end

@@ -6,12 +6,9 @@ class Shizen < ApplicationRecord
     scope :sort_good, ->{order(like: :desc)}
     scope :sort_new, ->{order(created_at: :desc)}
     scope :sort_old, ->{order(created_at: :asc)}
-    has_one_attached :tategazou
-    has_one_attached :tategazou2
-    has_one_attached :yokogazou
-    has_one_attached :yokogazou2
     has_many_attached :images
     before_create :refresh_hourly_weather!
+    validates :spot_name, presence: true
   def refresh_hourly_weather!
     result = WeatherFetcher.fetch_next_hour(latitude, longitude)
     return false if result.nil?
