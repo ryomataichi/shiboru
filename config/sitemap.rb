@@ -1,4 +1,4 @@
-SitemapGenerator::Sitemap.default_host = "https://shiboru-test.onrender.com" # 自分のドメインに変更
+SitemapGenerator::Sitemap.default_host = "https://shiboru-test.onrender.com"
 
 SitemapGenerator::Sitemap.create do
   add root_path, changefreq: "daily", priority: 1.0
