@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Shiboru</title>
+    <title><%= content_for?(:title) ? yield(:title) : "Shiboru | 自然スポット共有" %></title>
+    <meta name="description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "綺麗な自然スポットを保存・共有できるShiboru" %>">
+    <% noindex_pages = [
+    "devise/sessions#new",
+    "devise/registrations#new",
+    "devise/registrations#edit",
+    "shizens#edit",
+    "shizens#new"
+    ] %>
+
+    <% current_page = "#{controller_path}##{action_name}" %>
+
+    <% if noindex_pages.include?(current_page) %>
+      <meta name="robots" content="noindex,nofollow">
+    <% end %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
 
     <script src="https://kit.fontawesome.com/435fa8f9d8.js" crossorigin="anonymous"></script>
 
@@ -12,30 +26,30 @@
     <%= javascript_importmap_tags %>
   </head>
 
-<body>
-  <header>
-  <h1><%= link_to "Shiboru", shizens_path %></h1>
-  <div class="header-list">
-  <ul>
-    <li><%=link_to new_shizen_path  do%>
-    <i class="fa-solid fa-square-plus fa-2xl"></i>
-    <% end %></li>
-    
+  <body>
+    <header>
+      <h1><%= link_to "Shiboru", shizens_path %></h1>
+      <div class="header-list">
+      <ul>
+        <li><%=link_to new_shizen_path  do%>
+        <i class="fa-solid fa-square-plus fa-2xl"></i>
+        <% end %></li>
+        
 
-    <% if user_signed_in? %>
-    <li><%= link_to user_path(current_user.id) do %>
-    <i class="fa-regular fa-user fa-2xl"></i>
-    <% end %>
-    </li>
-    <% else %>
-    <li><%= link_to "新規登録", new_user_registration_path %></li>
-    <li><%= link_to "ログイン", new_user_session_path %></li>
-    <% end %>
-  </ul>
-  </div>
-</header>
-<main>
-  <%= yield %>
-</main>
-</body>
+        <% if user_signed_in? %>
+        <li><%= link_to user_path(current_user.id) do %>
+        <i class="fa-regular fa-user fa-2xl"></i>
+        <% end %>
+        </li>
+        <% else %>
+        <li><%= link_to "新規登録", new_user_registration_path %></li>
+        <li><%= link_to "ログイン", new_user_session_path %></li>
+        <% end %>
+      </ul>
+      </div>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+  </body>
 </html>

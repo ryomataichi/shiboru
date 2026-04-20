@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'shizens/:shizen_id/likes/:id' => 'likes#destroy'
   get "shizens/matome/:id" => "shizens#matome", as: :shizen_matome
   get "/refresh_weather", to: "shizens#refresh_weather"
+  get "/sitemap_refresh", to: "sitemaps#refresh"
 
   resources :users, only: [:index, :show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]

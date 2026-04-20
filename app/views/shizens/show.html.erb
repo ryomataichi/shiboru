@@ -1,3 +1,5 @@
+<% content_for :title, "#{@shizen.spot_name} | #{@shizen.ken.presence || '自然スポット'} | Shiboru" %>
+<% content_for :meta_description, "#{@shizen.spot_name}の魅力や場所、天気情報をShiboruでチェック。#{@shizen.setumei.to_s.truncate(90)}" %>
 <div class="show-container">
         <div class="show-top">
                 <%= link_to user_path(@shizen.user.id) do %>

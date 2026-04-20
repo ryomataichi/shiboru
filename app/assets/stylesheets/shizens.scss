@@ -324,7 +324,7 @@ margin-right: 2%;
 .submit_button {
   border: none;
   border-radius: 999px;
-  padding: 14px 32px;
+  padding: 14px 2px;
   font-size: 16px;
   font-weight: 700;
   color: white;
@@ -335,6 +335,16 @@ margin-right: 2%;
 
 .submit_button:hover {
   transform: translateY(-1px);
+}
+
+.delete_image_button {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  background: #ef4444;
+  color: #fff;
+  cursor: pointer;
 }
 
 @media (max-width: 900px) {
@@ -356,17 +366,6 @@ margin-right: 2%;
     width: 100%;
   }
 }
-
-.delete_image_button {
-  width: 100%;
-  border: none;
-  border-radius: 10px;
-  padding: 8px 14px;
-  background: #ef4444;
-  color: #fff;
-  cursor: pointer;
-}
-
 
 @media (max-width: 640px) {
   .account-edit-page {
