@@ -53,69 +53,70 @@
                         <i class="fas fa-heart fa-2x"></i><%= @shizen.likes.count %>
                 <% end %>
         </div>
-
-        <div class="namae">
-                <p><%= @shizen.spot_name %></p>
-        </div>
-        <% if @weather_type.present? %>
-        <p>現在の天気:
-        <%= image_tag weather_image_name(@weather_type), size: "60x60", alt: weather_label(@weather_type) %></p>
-        <% else %>
-        <p>現在の天気情報を取得できませんでした</p>
-        <% end %>
-
-        <% if @shizen.maplink? %>
-                <%= link_to @shizen.maplink do %>
-                        <i class="fa-solid fa-location-dot fa-2xl"></i>
+        <div class="show-content">
+                <div class="namae">
+                        <p><%= @shizen.spot_name %></p>
+                </div>
+                <% if @weather_type.present? %>
+                <p>現在の天気:
+                <%= image_tag weather_image_name(@weather_type), size: "60x60", alt: weather_label(@weather_type) %></p>
+                <% else %>
+                <p>現在の天気情報を取得できませんでした</p>
                 <% end %>
-        <% else %>
-                <i class="fa-solid fa-location-dot fa-2xl" style="color: rgb(150, 149, 149);"></i>
-        <% end %>
-        <% if @shizen.ken.present? %>
-                <%= link_to @shizen.ken, shizen_matome_path(@shizen.id), class: "ken-tag" %>
-        <% else %>
-                <span class= "ken-tag"> 未登録 </span>
-        <% end %>
 
-        <div class="setumei">
-                <%= @shizen.setumei %>
-        </div>
-        <br>
-        <div class="migisoroe">
-                <% if user_signed_in? %>
-                        <%= form_with(model: [@shizen, @comment], local: true) do |f| %>
-                        <br>
-                        <%= f.text_area :content %>
-                                <%= button_tag type: "submit" do %>
-                                        <i class="far fa-comments"></i> コメントする
+                <% if @shizen.maplink? %>
+                        <%= link_to @shizen.maplink do %>
+                                <i class="fa-solid fa-location-dot fa-2xl"></i>
+                        <% end %>
+                <% else %>
+                        <i class="fa-solid fa-location-dot fa-2xl" style="color: rgb(150, 149, 149);"></i>
+                <% end %>
+                <% if @shizen.ken.present? %>
+                        <%= link_to @shizen.ken, shizen_matome_path(@shizen.id), class: "ken-tag" %>
+                <% else %>
+                        <span class= "ken-tag"> 未登録 </span>
+                <% end %>
+
+                <div class="setumei">
+                        <%= @shizen.setumei %>
+                </div>
+                <br>
+                <div class="migisoroe">
+                        <% if user_signed_in? %>
+                                <%= form_with(model: [@shizen, @comment], local: true) do |f| %>
+                                <br>
+                                <%= f.text_area :content %>
+                                        <%= button_tag type: "submit" do %>
+                                                <i class="far fa-comments"></i> コメントする
+                                        <% end %>
                                 <% end %>
                         <% end %>
-                <% end %>
-        </div>
-        <div class="comment-wrapper">
-                <p>コメント一覧</p>
-                <br>
-                <% @comments.each do |c| %>
-                        <% if c.user.image.attached? %>
-                                <%= image_tag  c.user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
-                        <% end %>
-                        <%= link_to c.user.name, user_path(c.user.id) %>
+                </div>
+                <div class="comment-wrapper">
+                        <p>コメント一覧</p>
                         <br>
-                        <%= c.content %>
-                <% end %>
-        </div>
-
-        <h2>いいねしたユーザー</h2>
-        <% @shizen.liked_users.each do |user| %>
-                <%= link_to user_path(user.id) do %>
-                        <% if user.image.attached? %>
-                                <%= image_tag  user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
-                        <% else %>
-                                <i class="fa-solid fa-user fa-2x" style="color: rgb(150, 149, 149);"></i>
+                        <% @comments.each do |c| %>
+                                <% if c.user.image.attached? %>
+                                        <%= image_tag  c.user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+                                <% end %>
+                                <%= link_to c.user.name, user_path(c.user.id) %>
+                                <br>
+                                <%= c.content %>
                         <% end %>
-                        <%= user.name %>
+                </div>
+
+                <h2>いいねしたユーザー</h2>
+                <% @shizen.liked_users.each do |user| %>
+                        <%= link_to user_path(user.id) do %>
+                                <% if user.image.attached? %>
+                                        <%= image_tag  user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+                                <% else %>
+                                        <i class="fa-solid fa-user fa-2x" style="color: rgb(150, 149, 149);"></i>
+                                <% end %>
+                                <%= user.name %>
+                        <% end %>
                 <% end %>
-        <% end %>
-        <br>
-        <%= link_to "自然一覧に戻る", shizens_path %>
+                <br>
+                <%= link_to "自然一覧に戻る", shizens_path %>
+        </div>
 </div>

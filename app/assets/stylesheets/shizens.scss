@@ -183,6 +183,11 @@ margin-right: 2%;
   background-color: #ffffff;
 }
 
+.show-content{
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 .setumei {
   background-color: #e4e2e2;
   margin-right: 4%;
@@ -360,10 +365,6 @@ margin-right: 2%;
     flex-direction: column-reverse;
     gap: 16px;
     align-items: stretch;
-  }
-
-  .submit_button {
-    width: 100%;
   }
 }
 
