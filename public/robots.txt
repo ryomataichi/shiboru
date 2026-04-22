@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shiboru.jp/sitemap.xml.gz
+Sitemap: https://shiboru-test.onrender.com/sitemap.xml.gz
