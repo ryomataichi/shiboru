@@ -368,7 +368,7 @@ margin-right: 2%;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .account-edit-page {
     padding: 24px 12px;
   }
@@ -402,4 +402,32 @@ margin-right: 2%;
   width: 35%;
   padding-right: 2%;
 }
+.shizen{
+    flex:0 0 630px;
+    width: 630px;
+    height: 220px;
+    background-color: #ffffff;
+    margin-left: 20px;
+    border-radius: 20px;
+    overflow: hidden; 
+}
+
+.shizen-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 4px;
+  height: 230px;
+}
+
+.shizens-container{
+    margin-top: 2%;
+    margin-bottom: 1%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    gap: 5px;
+    background: #e5e7eb;
+}
+
 }
