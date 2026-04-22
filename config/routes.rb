@@ -26,5 +26,7 @@ Rails.application.routes.draw do
   get "users/match/:bangou" => "users#match", as: :users_match 
   get "users/dmitiran/:id" => "users#dmitiran", as: :users_dmitiran
   get "users/iine/:id" => "users#iine", as: :users_iine
+  get "/sitemap.xml.gz", to: "sitemaps#show", defaults: { format: :xml }
+  get "/sitemap_refresh", to: "sitemaps#refresh"
   root 'shizens#index'
 end
