@@ -352,6 +352,13 @@ margin-right: 2%;
   cursor: pointer;
 }
 
+.shizen-image img{
+   border-radius: 20px;
+   width: 360px; 
+   height: 240px; 
+   object-fit: cover;
+}
+
 @media (max-width: 900px) {
   .form_grid {
     grid-template-columns: 1fr;
@@ -405,7 +412,7 @@ margin-right: 2%;
 .shizen{
     flex:0 0 630px;
     width: 630px;
-    height: 220px;
+    max-height: 300px;
     background-color: #ffffff;
     margin-left: 20px;
     border-radius: 20px;
@@ -417,7 +424,7 @@ margin-right: 2%;
   align-items: flex-start;
   justify-content: space-between;
   margin: 4px;
-  height: 230px;
+  max-height: 300px;
 }
 
 .shizens-container{

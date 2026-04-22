@@ -358,13 +358,13 @@ header li {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0 27px;
+    margin: 0 12px;
 }
 .follower_table{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0 27px;
+    margin: 0 12px;
 }
 .follower_table p{
     text-align: center;
@@ -401,7 +401,7 @@ header li {
 
 .hyouzityuu,
 .hihyouzi {
-  font-size: 22.5px;
+  font-size: 21px;
 }
 .hyouzityuu a{
     color: rgb(0, 89, 255);
@@ -466,13 +466,13 @@ header li {
   display: block;
 }
 
-.shizen-image{
-    border-radius: 50%; 
-    width: 324px; 
-    height: 216px; 
+.shizen-image img{
+    border-radius: 7%; 
+    max-width: 342px;
+    max-height: 228px;
     object-fit:cover;
 }
-.toukousya--image{
+.toukousya--image img{
     border-radius: 50%; 
     width: 32px; 
     height: 32px; 

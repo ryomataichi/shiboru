@@ -372,7 +372,7 @@
 }
 .linku{
   margin-top: 10%;
-display: flex;
+  display: flex;
   flex-direction: column;     
   justify-content: center;    
   align-items: center;         
@@ -563,15 +563,19 @@ display: flex;
 
 .cansel-button {
   position: absolute;
-  top: -270px;
-  right: -445.5px;
+  top: -73px;
+  right: -150px;
   z-index: 1001;
+}
+
+.cansel-button i {
+  font-size: 24px;
 }
 
 .cansel-button button {
   background: none;
   border: none;
-  color: white;
+  color: rgb(255, 255, 255);
   z-index: 999;
 }
 
