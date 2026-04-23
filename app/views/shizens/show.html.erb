@@ -36,22 +36,22 @@
                 <% end %>
         </div>
 </div>
-
-
         <div class="migisoroe">
-                <% if user_signed_in? %>
-                        <% if current_user.already_liked?(@shizen) %>
-                                <%= link_to shizen_like_path(@shizen), method: :delete do %>
-                                        <i class="fas fa-heart fa-2x"></i><%= @shizen.likes.count %>
+                <span class="like-count">
+                        <% if user_signed_in? %>
+                                <% if current_user.already_liked?(@shizen) %>
+                                        <%= link_to shizen_like_path(id: @shizen.id, shizen_id: @shizen.id), method: :delete do %>
+                                                <i class="fas fa-heart"></i><%= @shizen.likes.count %>    
+                                        <% end %>
+                                <% else %>
+                                        <%= link_to shizen_likes_path(id: @shizen.id, shizen_id: @shizen.id), method: :post do %>
+                                                <i class="fa-regular fa-heart"></i><%= @shizen.likes.count %>
+                                        <% end %>
                                 <% end %>
                         <% else %>
-                                <%= link_to shizen_likes_path(@shizen), method: :post do %>
-                                        <i class="fa-regular fa-heart fa-2x"></i><%= @shizen.likes.count %>
-                                <% end %>
+                                <i class="fa-regular fa-heart"></i><%=@shizen.likes.count %>
                         <% end %>
-                <% else %>
-                        <i class="fas fa-heart fa-2x"></i><%= @shizen.likes.count %>
-                <% end %>
+                </span>
         </div>
         <div class="show-content">
                 <div class="namae">
@@ -81,7 +81,7 @@
                         <%= @shizen.setumei %>
                 </div>
                 <br>
-                <div class="migisoroe">
+                <div class="comment-form">
                         <% if user_signed_in? %>
                                 <%= form_with(model: [@shizen, @comment], local: true) do |f| %>
                                 <br>
@@ -96,12 +96,16 @@
                         <p>コメント一覧</p>
                         <br>
                         <% @comments.each do |c| %>
-                                <% if c.user.image.attached? %>
-                                        <%= image_tag  c.user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
-                                <% end %>
-                                <%= link_to c.user.name, user_path(c.user.id) %>
-                                <br>
-                                <%= c.content %>
+                                <div class="comment-item">
+                                        <% if c.user.image.attached? %>
+                                                <%= image_tag c.user.image %>
+                                        <% end %>
+
+                                        <div class="comment-content">
+                                                <%= link_to c.user.name, user_path(c.user.id) %>
+                                                <p><%= c.content %></p>
+                                        </div>
+                                </div>
                         <% end %>
                 </div>
 
