@@ -1,10 +1,17 @@
-<% content_for :title, "Shiboru | 綺麗な自然スポットを保存・共有" %>
+<% content_for :title, "Shiboru（シボル）| 自然スポット共有サイト" %>
 <% content_for :meta_description, "綺麗な自然スポットを保存・共有できるShiboru。場所、写真、天気情報からお気に入りの自然を見つけよう。" %>
+    <section class="hero">
+      <div class="hero-content">
+        <h2>
+          自然の美しさを、<br>
+          みんなでシェア。
+        </h2>
+
+        <p>お気に入りの自然スポットを保存・共有しよう。</p>
+
+      </div>
+    </section>
 <div class="main">
-<h3>Shiboruへようこそ
-<br>
-本サイトは綺麗な自然スポットを保存、共有するための投稿サイトです。</h3></div>
-<br><br>
     <div class="search-wrapper">
         <%= link_to '新しい順', shizens_path(new:"new")%> | 
         <%= link_to '古い順', shizens_path(old:"old")%> | 
@@ -37,36 +44,38 @@
                                     <% end %>
                                 </div>
                             </div>
-                        <span class="like-count">
-                            <% if user_signed_in? %>
-                                <% if current_user.already_liked?(t) %>
-                                    <%= link_to shizen_like_path(id: t.id, shizen_id: t.id), method: :delete do %>
-                                        <i class="fas fa-heart"></i><%= t.likes.count %>    
-                                    <% end %>
-                                <% else %>
-                                    <%= link_to shizen_likes_path(id: t.id, shizen_id: t.id), method: :post do %>
+                            <div class="seiretu">
+                                <span class="like-count">
+                                    <% if user_signed_in? %>
+                                        <% if current_user.already_liked?(t) %>
+                                            <%= link_to shizen_like_path(id: t.id, shizen_id: t.id), method: :delete do %>
+                                                <i class="fas fa-heart"></i><%= t.likes.count %>    
+                                            <% end %>
+                                        <% else %>
+                                            <%= link_to shizen_likes_path(id: t.id, shizen_id: t.id), method: :post do %>
+                                                <i class="fa-regular fa-heart"></i><%= t.likes.count %>
+                                            <% end %>
+                                        <% end %>
+                                    <% else %>
                                         <i class="fa-regular fa-heart"></i><%= t.likes.count %>
                                     <% end %>
-                                <% end %>
-                            <% else %>
-                                <i class="fa-regular fa-heart"></i><%= t.likes.count %>
-                            <% end %>
-                        </span>
-                        <span class="map-link">
-                            <% if t.maplink? %>
-                                <%= link_to t.maplink do %>
-                                    <i class="fa-solid fa-location-dot fa-2xl"></i>
-                                <% end %>
-                            <% else %>
-                                <i class="fa-solid fa-location-dot fa-2xl" style="color: rgb(150, 149, 149);"></i>
-                            <% end %>
-                            <% if t.ken.present? %>
-                                <%= link_to t.ken, shizen_matome_path(t.id), class: "ken-tag" %>
-                            <% else %>
-                                <span class= "ken-tag"> 未登録 </span>
-                            <% end %>
-                        </span>
-                        <br>
+                                </span>
+                                <span class="map-link">
+                                    <% if t.maplink? %>
+                                        <%= link_to t.maplink do %>
+                                            <i class="fa-solid fa-location-dot fa-2xl"></i>
+                                        <% end %>
+                                    <% else %>
+                                        <i class="fa-solid fa-location-dot fa-2xl" style="color: rgb(150, 149, 149);"></i>
+                                    <% end %>
+                                    <% if t.ken.present? %>
+                                        <%= link_to t.ken, shizen_matome_path(t.id), class: "ken-tag" %>
+                                    <% else %>
+                                        <span class= "ken-tag"> 未登録 </span>
+                                    <% end %>
+                                </span>
+                            </div>
+                        
                         <div class="user-info">
                             <%= link_to user_path(t.user.id) do %>
                                 <% if t.user.image.attached? %>
@@ -76,11 +85,9 @@
                                     <i class="fa-solid fa-user fa-2xl" style="color: rgb(150, 149, 149);"></i>
                                 <% end %>
                                 <%= t.user.name %>
-                            <% end %>
-                            <br>
+                            <% end %></div>
                             <%= smart_truncate(t.setumei, 16) %>
                         </div>
-                    </div>
                         <%= link_to shizen_path(t.id) do %> 
                             <% if t.images.attached? %>
                                 <div class="shizen-image"><%= image_tag t.images.first %></div> 

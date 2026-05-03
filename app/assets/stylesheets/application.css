@@ -22,32 +22,88 @@ body {
     font-family: "Helvetica Neue", "Hiragino Sans", "Yu Gothic", sans-serif;
 }
 header {
-    background-color:  #4b5563;
-    
-    height: 80px;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+
+  width: 100%;
+  height: 72px;
+  padding: 0 42px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: transparent;
+  box-sizing: border-box;
 }
-header a {
-    color: rgb(255, 255, 255); 
-    text-decoration: none; 
-}
+
 header h1 {
-    color: rgb(255, 255, 255);
-    margin-left: 20px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
-.header-list {
-    display: flex;
-    align-items: center;
+
+header a {
+  color: #fff;
+  text-decoration: none;
 }
-header ul {
-    display: flex;
+
+.header-list ul {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
-header li {
-    list-style: none;
-    margin-right: 40px;
+
+.header-list li {
+  list-style: none;
+}
+
+.header-list a {
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0.92;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.header-list a:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.header-list i {
+  font-size: 22px;
+}
+
+.hero {
+  position: relative;
+  height: 600px;
+
+  background-image:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)),
+    url("hero.jpg");
+
+  background-size: cover;
+  background-position: center;
+}
+
+/* テキスト */
+.hero-content {
+  position: absolute;
+  bottom: 60px;
+  left: 50px;
+  color: white;
+}
+
+.hero-content h2 {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.4;
 }
 
 .usershizens-container{
@@ -159,12 +215,18 @@ header li {
     margin-top: 2%;
 }
 
-.migisoroe{
-    text-align: right;
-}
 .namae{
     font-size: 30px;
 }
+
+.namae p {
+  margin: 0 0 16px;
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
 .pasuwa-do{
     text-align: center;
     margin-top: 10%;
@@ -248,21 +310,23 @@ header li {
 .pro{
     width: 50%;
 }
-
-.hyouzityuu,
-.hihyouzi {
-  font-size: 25px;
+.like-count a{
+    color: rgb(238, 165, 177);
+    font-size: 29px;
 }
-.hyouzityuu a{
-    color: rgb(0, 89, 255);
+.seiretu{
+      display: flex;
+  align-items: center; 
+  gap: 12px;
 }
-
 .user-info{
-    align-items: end;
+    margin-bottom: 1px;
 }
 
 .user-info a{
-    font-size: large;
+    gap: 4px;
+    display: flex;
+    align-items: center;
 }
 
 #qr-modal{
@@ -338,33 +402,64 @@ body {
   zoom: 0.9;
 }
 header {
-    background-color:  #4b5563;
-    
-    height: 72px;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+
+  width: 100%;
+  height: 72px;
+  padding: 0 42px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: transparent;
+  box-sizing: border-box;
 }
-header a {
-    color: rgb(255, 255, 255); 
-    text-decoration: none; 
-}
+
 header h1 {
-    color: rgb(255, 255, 255);
-    margin-left: 18px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
-.header-list {
-    display: flex;
-    align-items: center;
+
+header a {
+  color: #fff;
+  text-decoration: none;
 }
-header ul {
-    display: flex;
+
+.header-list ul {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
-header li {
-    list-style: none;
-    margin-right: 36px;
+
+.header-list li {
+  list-style: none;
 }
+
+.header-list a {
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0.92;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.header-list a:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.header-list i {
+  font-size: 22px;
+}
+
 
 .usershizens-container{
     overflow-x: scroll;
@@ -485,15 +580,6 @@ header li {
     width: 50%;
 }
 
-.hyouzityuu,
-.hihyouzi {
-  font-size: 21px;
-}
-.hyouzityuu a{
-    color: rgb(0, 89, 255);
-}
-
-
 .user-info{
     align-items: end;
 }
@@ -568,4 +654,30 @@ header li {
     height: 32px; 
     object-fit:cover;
 }
+.hero {
+  position: relative;
+  height: 500px;
+
+  background-image:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)),
+    url("hero.jpg");
+
+  background-size: cover;
+  background-position: center;
+}
+
+/* テキスト */
+.hero-content {
+  position: absolute;
+  bottom: 40px;
+  left: 35px;
+  color: white;
+}
+
+.hero-content h2 {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
 }

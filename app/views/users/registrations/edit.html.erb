@@ -21,6 +21,10 @@
       </div>
 
       <div class="form_row">
+        <%= f.label :back_image, "プロフィール背景画像", class: "form_label" %>
+        <%= f.file_field :back_image, class: "form_file" %>
+      </div>
+      <div class="form_row">
         <%= f.label :email, "メールアドレス", class: "form_label" %>
         <%= f.email_field :email, autocomplete: "email", class: "form_input" %>
       </div>

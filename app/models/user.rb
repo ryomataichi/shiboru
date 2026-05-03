@@ -16,6 +16,7 @@ class User < ApplicationRecord
     has_many :followings, through: :active_relationships, source: :followed
     has_many :followers, through: :passive_relationships, source: :follower
     has_one_attached :image
+    has_one_attached :back_image
     scope :active, -> { where(active: "true") }
 
   def already_liked?(shizen)

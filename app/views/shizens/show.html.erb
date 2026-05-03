@@ -1,23 +1,5 @@
 <% content_for :title, "#{@shizen.spot_name} | #{@shizen.ken.presence || '自然スポット'} | Shiboru" %>
 <% content_for :meta_description, "#{@shizen.spot_name}の魅力や場所、天気情報をShiboruでチェック。#{@shizen.setumei.to_s.truncate(90)}" %>
-<div class="show-container">
-        <div class="show-top">
-                <%= link_to user_path(@shizen.user.id) do %>
-                        <% if @shizen.user.image.attached? %>
-                                <%= image_tag  @shizen.user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
-                        <% else %>
-                                <i class="fa-solid fa-user fa-2x" style="color: rgb(150, 149, 149);"></i>
-                        <% end %>
-                        <%= @shizen.user.name %>
-                <% end %>
-                <div class="show-user-info">
-                        <% if user_signed_in? && current_user.id == @shizen.user_id %>
-                                <%= button_to edit_shizen_path(@shizen.id), method: :get do %>
-                                        <i class="fa-solid fa-gear fa-2x"></i>
-                                <% end %>
-                        <% end %>
-                </div>
-        </div>
 <div class="show-scroll-wrapper">
         <div class="show-scroll">
                 <% if @shizen.images.attached? %>
@@ -36,7 +18,14 @@
                 <% end %>
         </div>
 </div>
-        <div class="migisoroe">
+
+<div class="show-container">
+        <div class="show-content">
+                <div class="show-top">
+                <div class="namae">
+                        <p><%= @shizen.spot_name %></p>
+                </div>
+                <div class="show-user-info">
                 <span class="like-count">
                         <% if user_signed_in? %>
                                 <% if current_user.already_liked?(@shizen) %>
@@ -52,16 +41,18 @@
                                 <i class="fa-regular fa-heart"></i><%=@shizen.likes.count %>
                         <% end %>
                 </span>
-        </div>
-        <div class="show-content">
-                <div class="namae">
-                        <p><%= @shizen.spot_name %></p>
+                        <% if user_signed_in? && current_user.id == @shizen.user_id %>
+                                <%= button_to edit_shizen_path(@shizen.id), method: :get do %>
+                                        <i class="fa-solid fa-gear fa-2x"></i>
+                                <% end %>
+                        <% end %>
                 </div>
+        </div>
                 <% if @weather_type.present? %>
                 <p>現在の天気:
                 <%= image_tag weather_image_name(@weather_type), size: "60x60", alt: weather_label(@weather_type) %></p>
                 <% else %>
-                <p>現在の天気情報を取得できませんでした</p>
+                <p>現在の天気情報を取得できませんでした</p><br>
                 <% end %>
 
                 <% if @shizen.maplink? %>
@@ -77,8 +68,20 @@
                         <span class= "ken-tag"> 未登録 </span>
                 <% end %>
 
-                <div class="setumei">
-                        <%= @shizen.setumei %>
+                <div class="show-setumei">
+                        <%= simple_format(@shizen.setumei) %>
+                </div>
+                <br>
+                <div class="show-user">
+                        <%= link_to user_path(@shizen.user.id) do %>
+                                <% if @shizen.user.image.attached? %>
+                                        <%= image_tag  @shizen.user.image,style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+                                <% else %>
+                                        <i class="fa-solid fa-user fa-2x" style="color: rgb(150, 149, 149);"></i>
+                                <% end %>
+                                <%= @shizen.user.name %>
+                                <%= simple_format(@shizen.user.profile) %>
+                        <% end %>
                 </div>
                 <br>
                 <div class="comment-form">
@@ -103,7 +106,7 @@
 
                                         <div class="comment-content">
                                                 <%= link_to c.user.name, user_path(c.user.id) %>
-                                                <p><%= c.content %></p>
+                                                <p><%= simple_format(c.content) %></p>
                                         </div>
                                 </div>
                         <% end %>

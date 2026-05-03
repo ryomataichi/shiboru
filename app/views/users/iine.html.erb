@@ -1,153 +1,211 @@
-<div class="saidai">
-    <div class="hidarihanbun">
-        <% if @user.image.attached? %>
-            <%= image_tag  @user.image, class: "user-image" %>
-        <% else %> 
-            <i class="fa-solid fa-user fa-8x" style="color: rgb(150, 149, 149);"></i>
-        <% end %>
-    <br><br>
-        <% if current_user.id == @user.id %>
-            <div class="linku">
-                <div class="hihyouzi"><%= link_to "あなたの投稿", user_path(current_user.id) %></div>
-                <br><br>
-                <div class="hyouzityuu"><%= link_to "いいねした投稿", users_iine_path(id: @user.id) %></div>
-            </div>
-        <% end %>
-    </div>
-    <div class="migihanbun">
-        <div class="prohu">
-            <span class="user-name"><%= @user.name %></span>
-            <div class="sonota">
-                <div class="kesi-button"><button id="open-qr-button"><i class="fa-solid fa-qrcode"></i></button></div>
-                
-                <div id="qr-modal" class="hidden">
-                    <div class="cansel-button"><button id="close-qr-button"><i class="fa-solid fa-xmark"></i></button></div>
-                    <div class="qr-stage">
-                        <%= image_tag "qr_bg.jpeg", class: "qr-bg" %>
-                        <div class="qr-code">
-                            <%= raw RQRCode::QRCode.new(request.original_url).as_svg(module_size: 4) %>
-                        </div>
-                    </div>
-                </div>
+<div class="user-page">
 
-                <% if current_user != @user %>
-                    <td><%= render "relationships/btn", user: @user, options: { class: ""} %></td>
-                    <% if @isRoom == true %>
-                        <%= link_to 'DMへ', room_path(@roomId) %>
-                    <% else %>
-                        <%= form_for @room do |f| %>
-                            <%= fields_for @entry do |e|%>
-                                <% e.hidden_field :user_id, value: @user.id %>
-                            <% end %>
-                            <%= f.submit "DMを開始する"%>
-                        <% end %>
-                    <% end %>
-                <% else %>
-                    <%= link_to edit_user_registration_path(@user.id), method: :get do %>
-                        <i class="fa-solid fa-user-gear"></i>
-                    <% end %>
-                    <%= link_to users_dmitiran_path(id: @user.id), method: :get do %>
-                        <i class="fa-solid fa-paper-plane"></i>
-                    <% end %>
+    <section class="user-hero">
+    <% if @user.back_image.attached? %>
+        <%= image_tag @user.back_image, class: "user-hero-bg" %>
+    <% else %>
+        <%= image_tag "user_default_bg.png", class: "user-hero-bg" %>
+    <% end %>
+
+    <div class="user-hero-overlay"></div>
+
+    <div class="user-hero-inner">
+      <div class="user-hero-top">
+        <%= link_to "‹ 戻る", "javascript:history.back()", class: "user-back-link" %>
+
+        <div class="sonota user-actions">
+          <div class="kesi-button">
+            <button id="open-qr-button"><i class="fa-solid fa-qrcode"></i></button>
+          </div>
+
+          <div id="qr-modal" class="hidden">
+            <div class="cansel-button">
+              <button id="close-qr-button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="qr-stage">
+              <%= image_tag "qr_bg.jpeg", class: "qr-bg" %>
+              <div class="qr-code">
+                <%= raw RQRCode::QRCode.new(request.original_url).as_svg(module_size: 4) %>
+              </div>
+            </div>
+          </div>
+
+          <% if current_user != @user %>
+            <%= render "relationships/btn", user: @user, options: { class: "" } %>
+
+            <% if @isRoom == true %>
+              <%= link_to 'DMへ', room_path(@roomId), class: "user-action-link" %>
+            <% else %>
+              <%= form_for @room do |f| %>
+                <%= fields_for @entry do |e| %>
+                  <% e.hidden_field :user_id, value: @user.id %>
                 <% end %>
-                <% if current_user.id == @user.id %>
-                    <div class="kesi-button">
-                        <%= button_to destroy_user_session_path, method: :delete do %>
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                        <% end %>
-                    </div>
-                <% end %>
-            </div>
-        </div>
-        <div class="deka_table">
-            <div class="follow_table">
-                <p><%= link_to @user.followings.count, user_followings_path(@user) %></p>
-                <f>フォロー</f>
-            </div>
-            <div class="follower_table">
-                <p><%= link_to @user.followers.count, user_followers_path(@user) %></p>
-                <f>フォロワー</f>
-            </div>
-        </div>
-        <div class="setumei">
-            <%= @user.profile %>
-        </div>
-        
-        <br>
-        <div class="shizen-container">
-            <% @user.liked_shizens.each do |t| %>
-                    <div class="shizen">
-                        <div class="shizen-content">
-                            <div class="shizen-text">
-                                <%= link_to smart_truncate(t.spot_name, 6), shizen_path(t.id) ,class: "spot-name" %>
-                                    <div class=" oya-hourly-weather">
-                                        <div class="hourly-weather">
-                                            <% if t.hourly_weather_type.present? %>
-                                                <% if t.hourly_weather_at.present? %>
-                                                    <%= t.hourly_weather_at.in_time_zone.strftime("%H:00") %>~<%= (t.hourly_weather_at + 1.hour).in_time_zone.strftime("%H:00") %>の天気
-                                                <% end %>
-                                                <%= image_tag weather_image_name(t.hourly_weather_type), size: "40x40", alt: weather_label(t.hourly_weather_type) %>
-                                            <% else %>
-                                                1時間ごとの天気情報を取得できませんでした
-                                            <% end %>
-                                        </div>
-                                    </div>
-                                <span class="like-count">
-                                    <% if user_signed_in? %>
-                                        <% if current_user.already_liked?(t) %>
-                                            <%= link_to shizen_like_path(id: t.id, shizen_id: t.id), method: :delete do %>
-                                                <i class="fas fa-heart"></i><%= t.likes.count %>    
-                                            <% end %>
-                                        <% else %>
-                                            <%= link_to shizen_likes_path(id: t.id, shizen_id: t.id), method: :post do %>
-                                                <i class="fa-regular fa-heart"></i><%= t.likes.count %>
-                                            <% end %>
-                                        <% end %>
-                                    <% else %>
-                                        <i class="fa-regular fa-heart"></i><%= t.likes.count %>
-                                    <% end %>
-                                </span>
-                                <span class="map-link">
-                                    <% if t.maplink? %>
-                                        <%= link_to t.maplink do %>
-                                            <i class="fa-solid fa-location-dot fa-2xl"></i>
-                                        <% end %>
-                                    <% else %>
-                                        <i class="fa-solid fa-location-dot fa-2xl" style="color: rgb(150, 149, 149);"></i>
-                                    <% end %>
-                                    <% if t.ken.present? %>
-                                        <%= link_to t.ken, shizen_matome_path(t.id), class: "ken-tag" %>
-                                    <% else %>
-                                        <span class= "ken-tag"> 未登録 </span>
-                                    <% end %>
-                                </span>
-                                <br>
-                                <div class="user-info">
-                                    <%= link_to user_path(t.user.id) do %>
-                                        <% if t.user.image.attached? %>
-                                            <%= image_tag t.user.image, class:"toukousya--image" %>
-                                        <% else %>
-                                            <br>
-                                            <i class="fa-solid fa-user fa-2xl" style="color: rgb(150, 149, 149);"></i>
-                                        <% end %>
-                                        <%= t.user.name %>
-                                    <% end %>
-                                    <br>
-                                    <%= smart_truncate(t.setumei, 16) %>
-                                </div>
-                            </div>
-                            <%= link_to shizen_path(t.id) do %> 
-                                <%= link_to shizen_path(t.id) do %> 
-                                    <% if t.images.attached? %>
-                                        <div class="shizen-image"><%= image_tag t.images.first,style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %></div> 
-                                    <% else %>
-                                        <div class="shizen-image"><%= image_tag "no_image.jpeg", style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %></div>
-                                    <% end %>
-                                <% end %>
-                            <% end %>
-                        </div>
-                    </div>
+                <%= f.submit "DMを開始する", class: "user-action-submit" %>
+              <% end %>
             <% end %>
+          <% else %>
+            <%= link_to edit_user_registration_path(@user.id), method: :get, class: "user-action-icon" do %>
+              <i class="fa-solid fa-user-gear"></i>
+            <% end %>
+
+            <%= link_to users_dmitiran_path(id: @user.id), method: :get, class: "user-action-icon" do %>
+              <i class="fa-solid fa-paper-plane"></i>
+            <% end %>
+          <% end %>
+
+          <% if current_user.id == @user.id %>
+            <div class="kesi-button">
+              <%= button_to destroy_user_session_path, method: :delete do %>
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <% end %>
+            </div>
+          <% end %>
         </div>
+      </div>
+
+      <div class="user-profile-main">
+        <div class="user-avatar-wrap">
+          <% if @user.image.attached? %>
+            <%= image_tag @user.image, class: "user-image" %>
+          <% else %>
+            <div class="user-image-placeholder">
+              <i class="fa-solid fa-user"></i>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="user-profile-text">
+          <h1 class="user-name"><%= @user.name %></h1>
+
+          <div class="deka_table">
+            <div class="follow_table">
+              <p><%= link_to @user.followings.count, user_followings_path(@user) %></p>
+              <f>フォロー</f>
+            </div>
+
+            <div class="follower_table">
+              <p><%= link_to @user.followers.count, user_followers_path(@user) %></p>
+              <f>フォロワー</f>
+            </div>
+
+            <div class="follow_table">
+              <p><%= @user.shizens.count %></p>
+              <f>投稿</f>
+            </div>
+          </div>
+
+          <div class="profile-text">
+            <%= simple_format(@user.profile) %>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <% if current_user.id == @user.id %>
+    <nav class="user-tabs">
+      <div class="hihyouzi">
+        <%= link_to user_path(current_user.id) do %>
+          <i class="fa-solid fa-table-cells-large"></i>
+          あなたの投稿
+        <% end %>
+      </div>
+
+      <div class="hyouzityuu">
+        <%= link_to users_iine_path(id: @user.id) do %>
+          <i class="fa-regular fa-heart"></i>
+          いいねした投稿
+        <% end %>
+      </div>
+    </nav>
+  <% end %>
+
+  <section class="user-post-section">
+    <div class="user-section-header">
+      <h2>いいねした投稿</h2>
+    </div>
+
+    <div class="shizen-container user-post-grid">
+      <% @user.liked_shizens.each do |t| %>
+        <div class="shizen user-post-card">
+          <%= link_to shizen_path(t.id) do %>
+            <% if t.images.attached? %>
+              <div class="shizen-image">
+                <%= image_tag t.images.first, style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %>
+              </div>
+            <% else %>
+              <div class="shizen-image">
+                <%= image_tag "no_image.jpeg", style: "border-radius: 20px; width: 360px; height: 240px; object-fit:cover;" %>
+              </div>
+            <% end %>
+          <% end %>
+
+          <div class="shizen-text user-post-body">
+            <%= link_to smart_truncate(t.spot_name, 6), shizen_path(t.id), class: "spot-name" %>
+
+            <div class="oya-hourly-weather">
+              <div class="hourly-weather">
+                <% if t.hourly_weather_type.present? %>
+                  <% if t.hourly_weather_at.present? %>
+                    <%= t.hourly_weather_at.in_time_zone.strftime("%H:00") %>~<%= (t.hourly_weather_at + 1.hour).in_time_zone.strftime("%H:00") %>の天気
+                  <% end %>
+                  <%= image_tag weather_image_name(t.hourly_weather_type), size: "40x40", alt: weather_label(t.hourly_weather_type) %>
+                <% else %>
+                  1時間ごとの天気情報を取得できませんでした
+                <% end %>
+              </div>
+            </div>
+
+            <div class="seiretu">
+              <span class="like-count">
+                <% if user_signed_in? %>
+                  <% if current_user.already_liked?(t) %>
+                    <%= link_to shizen_like_path(id: t.id, shizen_id: t.id), method: :delete do %>
+                      <i class="fas fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to shizen_likes_path(id: t.id, shizen_id: t.id), method: :post do %>
+                      <i class="fa-regular fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <i class="fa-regular fa-heart"></i><%= t.likes.count %>
+                <% end %>
+              </span>
+
+              <span class="map-link">
+                <% if t.maplink? %>
+                  <%= link_to t.maplink do %>
+                    <i class="fa-solid fa-location-dot"></i>
+                  <% end %>
+                <% else %>
+                  <i class="fa-solid fa-location-dot" style="color: rgb(150, 149, 149);"></i>
+                <% end %>
+
+                <% if t.ken.present? %>
+                  <%= link_to t.ken, shizen_matome_path(t.id), class: "ken-tag" %>
+                <% else %>
+                  <span class="ken-tag">未登録</span>
+                <% end %>
+              </span>
+            </div>
+
+            <div class="user-info">
+              <%= link_to user_path(t.user.id) do %>
+                <% if t.user.image.attached? %>
+                  <%= image_tag t.user.image, class: "toukousya--image" %>
+                <% else %>
+                  <i class="fa-solid fa-user" style="color: rgb(150, 149, 149);"></i>
+                <% end %>
+                <%= t.user.name %>
+              <% end %>
+              <br>
+              <%= smart_truncate(t.setumei, 16) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
 </div>
