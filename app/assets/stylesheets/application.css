@@ -510,7 +510,7 @@ header a {
     margin-top: 2.7%;
 }
 .edit_container{
-    margin-top: 0.9%;
+    padding-top: 13%;
     display: flex;
     align-items: center;
     justify-content: center;
