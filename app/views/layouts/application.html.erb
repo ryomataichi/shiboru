@@ -4,6 +4,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Shiboru | 自然スポット共有" %></title>
     <meta name="google-site-verification" content="9Sg6fo_-ezNTFiXeBi3Y9xjf32xcAINO_tUTmfDHgmc" />
     <meta name="description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "綺麗な自然スポットを保存・共有できるShiboru" %>">
+    <link rel="canonical" href="<%= request.base_url + request.path %>">
     <% noindex_pages = [
     "devise/sessions#new",
     "devise/registrations#new",
@@ -11,6 +12,9 @@
     "shizens#edit",
     "shizens#new"
     ] %>
+    <% if params[:new] || params[:old] || params[:good] %>
+      <meta name="robots" content="noindex">
+    <% end %>
 
     <% current_page = "#{controller_path}##{action_name}" %>
 
