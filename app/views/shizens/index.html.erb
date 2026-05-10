@@ -75,7 +75,7 @@
                                     <% end %>
                                 </span>
                             </div>
-                        
+                        <br>
                         <div class="user-info">
                             <%= link_to user_path(t.user.id) do %>
                                 <% if t.user.image.attached? %>
@@ -103,60 +103,71 @@
             <div class="shizen">
                 <div class="shizen-content">
                     <div class="shizen-text">
-                    <%= link_to smart_truncate(t.spot_name, 6), shizen_path(t.id) ,class: "spot-name" %>
-                        <div class=" oya-hourly-weather">
-                            <div class="hourly-weather">
-                                <% if t.hourly_weather_type.present? %>
-                                    <% if t.hourly_weather_at.present? %>        
-                                        <%= t.hourly_weather_at.in_time_zone.strftime("%H:00") %>~<%= (t.hourly_weather_at + 1.hour).in_time_zone.strftime("%H:00") %>の天気
+                        <%= link_to smart_truncate(t.spot_name, 6), shizen_path(t.id) ,class: "spot-name" %>
+                            <div class=" oya-hourly-weather">
+                                <div class="hourly-weather">
+                                    <% if t.hourly_weather_type.present? %>
+                                        <% if t.hourly_weather_at.present? %>
+                                            <%= t.hourly_weather_at.in_time_zone.strftime("%H:00") %>~<%= (t.hourly_weather_at + 1.hour).in_time_zone.strftime("%H:00") %>の天気
+                                        <% end %>
+                                        <%= image_tag weather_image_name(t.hourly_weather_type), size: "40x40", alt: weather_label(t.hourly_weather_type) %>
+                                    <% else %>
+                                        1時間ごとの天気情報を取得できませんでした
                                     <% end %>
-                                    <%= image_tag weather_image_name(t.hourly_weather_type), size: "40x40", alt: weather_label(t.hourly_weather_type) %>
-                                <% else %>
-                                    1時間ごとの天気情報を取得できませんでした
-                                <% end %>
+                                </div>
                             </div>
-                        </div>
+                            <div class="seiretu">
                         <span class="like-count">
-                            <% if user_signed_in? %>
-                                <% if current_user.already_liked?(t) %>
-                                    <%= link_to shizen_like_path(id: t.id, shizen_id: t.id), method: :delete do %>
-                                        <i class="fas fa-heart"></i><%= t.likes.count %>    
-                                    <% end %>
-                                <% else %>
-                                    <%= link_to shizen_likes_path(id: t.id, shizen_id: t.id), method: :post do %>
+                                    <% if user_signed_in? %>
+                                        <% if current_user.already_liked?(t) %>
+                                            <%= link_to shizen_like_path(id: t.id, shizen_id: t.id), method: :delete do %>
+                                                <i class="fas fa-heart"></i><%= t.likes.count %>    
+                                            <% end %>
+                                        <% else %>
+                                            <%= link_to shizen_likes_path(id: t.id, shizen_id: t.id), method: :post do %>
+                                                <i class="fa-regular fa-heart"></i><%= t.likes.count %>
+                                            <% end %>
+                                        <% end %>
+                                    <% else %>
                                         <i class="fa-regular fa-heart"></i><%= t.likes.count %>
                                     <% end %>
-                                <% end %>
-                            <% else %>
-                                <i class="fa-regular fa-heart"></i><%= t.likes.count %>
-                            <% end %>
-                        </span>
-                        <span class="map-link">
-                            <%= link_to t.maplink do %>
-                                <i class="fa-solid fa-location-dot fa-2xl"></i>
-                            <% end %>
-                            <%= link_to t.ken, shizen_matome_path(t.id), class: "ken-tag" %>
-                        </span>
-                    <br>
-                        <%= link_to user_path(t.user.id) do %>
-                            <% if t.user.image.attached? %>
-                                <%= image_tag t.user.image,style: "border-radius: 50%; width: 36px; height: 36px; object-fit:cover;" %>
-                            <% else %>
-                                <i class="fa-solid fa-user" style="color: rgb(150, 149, 149);"></i>
-                            <% end %>
-                            <%= t.user.name %>                            
-                        <% end %>
-                    <br>
-                    <%= smart_truncate(t.setumei, 16) %>
+                                </span>
+                                <span class="map-link">
+                                    <% if t.maplink? %>
+                                        <%= link_to t.maplink do %>
+                                            <i class="fa-solid fa-location-dot fa-2xl"></i>
+                                        <% end %>
+                                    <% else %>
+                                        <i class="fa-solid fa-location-dot fa-2xl" style="color: rgb(150, 149, 149);"></i>
+                                    <% end %>
+                                    <% if t.ken.present? %>
+                                        <%= link_to t.ken, shizen_matome_path(t.id), class: "ken-tag" %>
+                                    <% else %>
+                                        <span class= "ken-tag"> 未登録 </span>
+                                    <% end %>
+                                </span>
                     </div>
-                    <%= link_to shizen_path(t.id) do %> 
-                        <% if t.images.attached? %>
-                            <div class="shizen-image"><%= image_tag t.images.first %></div> 
+                    <br>
+                        <div class="user-info">
+                            <%= link_to user_path(t.user.id) do %>
+                                <% if t.user.image.attached? %>
+                                    <%= image_tag t.user.image,style: "border-radius: 50%; width: 32px; height: 32px; object-fit:cover;" %>
+                                <% else %>
+                                    <br>
+                                    <i class="fa-solid fa-user fa-2xl" style="color: rgb(150, 149, 149);"></i>
+                                <% end %>
+                                <%= t.user.name %>
+                            <% end %></div>
+                            <%= smart_truncate(t.setumei, 16) %>
+                        </div>
+                        <%= link_to shizen_path(t.id) do %> 
+                            <% if t.images.attached? %>
+                                <div class="shizen-image"><%= image_tag t.images.first %></div> 
+                            <% end %>
                         <% end %>
-                    <% end %>                
                 </div>
             </div>
         <% end %>
-    </div>   
+    </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
